@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="zh" translate="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>龍運轩ᝰ美食中心 · LYX Food Center</title>
+<meta name="color-scheme" content="light dark">
+<style>
+:root{
+  --bg:#f7fafc; --card:#ffffff; --ink:#0f172a; --muted:#667085; --line:#e5e7eb;
+  --brand:#0ea5e9; --brand2:#0284c7; --ok:#10b981; --accent:#f59e0b; --chip:#eef6ff;
+  --shadow:0 10px 25px rgba(2,8,23,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1220; --card:#0f172a; --ink:#e6edf5; --muted:#9aa6b2; --line:#233041;
+    --brand:#22b8f0; --brand2:#1993d1; --ok:#27d7a7; --accent:#f7b955; --chip:#0c2030;
+    --shadow:0 10px 25px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1200px;margin:22px auto;padding:0 16px}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+@media (max-width:980px){.grid{grid-template-columns:1fr}}
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff;border-bottom:1px solid rgba(255,255,255,.25);box-shadow:0 2px 18px rgba(2,8,23,.15)}
+.header-in{max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+h1{margin:0;font-size:22px;font-weight:900;letter-spacing:.3px}
+h1 small{display:block;opacity:.85;font-weight:600}
+.lang{display:flex;gap:6px;align-items:center}
+.lang button{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.18);color:#fff;font-weight:800;cursor:pointer}
+.lang button.active{background:#fff;color:#0b3a55;border-color:#fff}
+.subnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:700;font-size:13px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.panel h3{margin:0;padding:14px 16px;border-bottom:1px solid var(--line);font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
+.section{padding:12px}
+.group-title{margin:10px 10px 6px;padding:8px 12px;border-left:4px solid var(--accent);border-radius:12px;background:color-mix(in srgb,var(--accent) 10%,transparent);font-weight:900}
+.group-title small{display:block;color:var(--muted);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:10px}
+@media (max-width:720px){.cards{grid-template-columns:1fr}}
+.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:transform .12s ease, box-shadow .12s ease}
+.item:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(2,8,23,.08)}
+.left .title{font-weight:900}
+.price-badge{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--line);font-size:12px;font-weight:700}
+.qty{min-width:42px;text-align:center;font-weight:900}
+.btn{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;font-weight:800}
+.btn.small{background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.btn.ok{background:linear-gradient(90deg,var(--ok),#059669);color:#fff;border:none}
+.btn.brand{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff;border:none}
+.btn.block{width:100%}
+.btn:active{transform:scale(.98)}
+.sticky{position:sticky;top:86px}
+.sum{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
+.note{width:100%;height:68px;border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--card);color:var(--ink)}
+.cart-total{font-size:15px;font-weight:900;border:1px dashed var(--line);border-radius:12px;padding:8px 10px;background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.stat{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.stat .box{flex:1;min-width:130px;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--card);text-align:center}
+.stat .box b{display:block;font-size:18px;margin-top:2px}
+@media (max-width:980px){
+  .floating{position:sticky;bottom:0;z-index:25;background:var(--card);border-top:1px solid var(--line);padding:10px;box-shadow:0 -6px 16px rgba(2,8,23,.08)}
+}
+#print-area{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-in">
+    <div>
+      <h1 id="brand">龍運轩ᝰ美食中心 <small>LYX Food Center</small></h1>
+      <nav class="subnav">
+        <a class="chip" href="#noodle" id="chip-noodle">龍兴记ᝰ云吞面</a>
+        <a class="chip" href="#drink" id="chip-drink">饮料</a>
+        <a class="chip" href="#aunt" id="chip-aunt">婶婶档</a>
+      </nav>
+    </div>
+    <div class="lang">
+      <span>🌐</span>
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">English</button>
+      <button id="btn-vi" onclick="setLang('vi')">Tiếng Việt</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap grid">
+  <!-- 左：菜单 -->
+  <section class="panel">
+    <h3 id="title-order">点餐 / Order</h3>
+    <div id="menuArea"></div>
+
+    <!-- 移动端底部操作条 -->
+    <div class="floating">
+      <div class="cart-total" id="miniTotal">件数 0 · 合计 RM 0.00</div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn brand block" onclick="printReceipt()" id="btn-print">打印小票</button>
+        <button class="btn ok block" onclick="finalizeOrder()" id="btn-finish">完成并统计（群聊）</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 右：购物车 + 统计 -->
+  <aside class="panel sticky">
+    <h3 id="title-cart">订单 / Cart</h3>
+    <div id="cart" class="section"></div>
+    <div class="section">
+      <textarea id="note" class="note" placeholder="备注（例：少糖/少冰/加辣）"></textarea>
+      <div class="sum">
+        <button class="btn brand block" onclick="printReceipt()" id="btn-print-2">打印小票</button>
+        <button class="btn ok block" onclick="finalizeOrder()" id="btn-finish-2">完成并统计（群聊）</button>
+        <button class="btn block" style="margin-top:8px" onclick="clearCart()" id="btn-new">新订单</button>
+      </div>
+    </div>
+
+    <h3 id="title-today">今日统计 / Today</h3>
+    <div class="section">
+      <div class="stat">
+        <div class="box"><span id="stat-orders-label">订单笔数</span><b id="st_orders">0</b></div>
+        <div class="box"><span id="stat-items-label">售出件数</span><b id="st_items">0</b></div>
+        <div class="box"><span id="stat-revenue-label">销售金额</span><b id="st_revenue">RM 0.00</b></div>
+      </div>
+      <div class="sum" style="display:flex;flex-wrap:wrap;gap:8px">
+        <button class="btn" onclick="openStatsDetail()" id="btn-detail">查看明细</button>
+        <button class="btn" onclick="exportTodayCSV()" id="btn-exp-today">导出今日 CSV</button>
+        <button class="btn" onclick="exportWeekCSV()" id="btn-exp-week">导出本周 CSV</button>
+        <button class="btn" onclick="exportMonthCSV()" id="btn-exp-month">导出本月 CSV</button>
+        <button class="btn" onclick="cancelLastOrder()" id="btn-cancel">删单（需密码）</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- 打印区 -->
+<div id="print-area"></div>
+
+<script>
+/* ======= 管理员 PIN（删单） ======= */
+const ADMIN_PIN = "Lyx115599$";
+
+/* ======= 三语字典 ======= */
+const i18n = {
+  zh:{brandCN:"龍運轩ᝰ美食中心",brandEN:"LYX Food Center",
+      chipNoodle:"龍兴记ᝰ云吞面",chipDrink:"饮料",chipAunt:"婶婶档",
+      order:"点餐 / Order",cart:"订单 / Cart",today:"今日统计 / Today",
+      statOrders:"订单笔数",statItems:"售出件数",statRevenue:"销售金额",
+      print:"打印小票",finish:"完成并统计（群聊）",newOrder:"新订单",
+      detail:"查看明细",expToday:"导出今日 CSV",expWeek:"导出本周 CSV",expMonth:"导出本月 CSV",cancel:"删单（需密码）",
+      groupNoodle:"龍兴记ᝰ云吞面",groupDrink:"饮料",groupAunt:"婶婶档",
+      hintTapAdd:"点击 + 加入订单",hot:"热",ice:"冰",
+      sizeS:"小",sizeM:"中",sizeL:"大",
+      sums:(n,t,c)=>`件数 ${n} · 合计 ${c} ${fmt(t)}`,
+      notePH:"备注（例：少糖/少冰/加辣）",
+      msgHeader:(cn,en)=>`【${cn} ${en}】订单`,printTotal:"合计 Total:",
+      alertAddFirst:"请先点餐",alertDone:(n,c,sum)=>`已完成：${n} 件 · 金额 ${c} ${fmt(sum)}`,
+      statsTitle:"【今日统计】",statsNone:"（无明细）",
+      enterPin:"请输入管理员密码",wrongPin:"密码错误",noOrderToCancel:"没有可撤销的订单",cancelSuccess:(c,a)=>`已撤销上一单：－${c} ${fmt(a)}`
+  },
+  en:{brandCN:"龍運轩ᝰ美食中心",brandEN:"LYX Food Center",
+      chipNoodle:"LHK · Wonton Noodles",chipDrink:"Drinks",chipAunt:"Auntie's Stall",
+      order:"Order",cart:"Cart",today:"Today",
+      statOrders:"Orders",statItems:"Items",statRevenue:"Revenue",
+      print:"Print",finish:"Finish & Log (WA Group)",newOrder:"New Order",
+      detail:"Details",expToday:"Export Today CSV",expWeek:"Export Week CSV",expMonth:"Export Month CSV",cancel:"Void Last (PIN)",
+      groupNoodle:"Long Hing Kee · Wonton Noodles",groupDrink:"Drinks",groupAunt:"Auntie's Stall",
+      hintTapAdd:"Tap + to add",hot:"Hot",ice:"Iced",
+      sizeS:"S",sizeM:"M",sizeL:"L",
+      sums:(n,t,c)=>`Items ${n} · Total ${c} ${fmt(t)}`,
+      notePH:"Notes (e.g. less sugar / less ice / spicy)",
+      msgHeader:(cn,en)=>`[${cn} ${en}] Order`,printTotal:"Total:",
+      alertAddFirst:"Please add items first",alertDone:(n,c,sum)=>`Completed: ${n} items · ${c} ${fmt(sum)}`,
+      statsTitle:"[Today Stats]",statsNone:"(No details)",
+      enterPin:"Enter admin PIN",wrongPin:"Wrong PIN",noOrderToCancel:"No order to cancel",cancelSuccess:(c,a)=>`Voided last order: -${c} ${fmt(a)}`
+  },
+  vi:{brandCN:"龍運轩ᝰ美食中心",brandEN:"LYX Food Center",
+      chipNoodle:"Mì hoành thánh LHK",chipDrink:"Thức uống",chipAunt:"Sạp của Cô",
+      order:"Gọi món",cart:"Giỏ hàng",today:"Hôm nay",
+      statOrders:"Đơn",statItems:"Phần",statRevenue:"Doanh thu",
+      print:"In hóa đơn",finish:"Hoàn tất & gửi nhóm",newOrder:"Đơn mới",
+      detail:"Xem chi tiết",expToday:"Xuất CSV hôm nay",expWeek:"Xuất CSV tuần",expMonth:"Xuất CSV tháng",cancel:"Hủy đơn cuối (PIN)",
+      groupNoodle:"Mì hoành thánh LHK",groupDrink:"Thức uống",groupAunt:"Quầy của Cô",
+      hintTapAdd:"Nhấn + để thêm",hot:"Nóng",ice:"Đá",
+      sizeS:"Nhỏ",sizeM:"Vừa",sizeL:"Lớn",
+      sums:(n,t,c)=>`Số phần ${n} · Tổng ${c} ${fmt(t)}`,
+      notePH:"Ghi chú (ít đường / ít đá / cay...)",
+      msgHeader:(cn,en)=>`[${cn} ${en}] Đơn hàng`,printTotal:"Tổng cộng:",
+      alertAddFirst:"Vui lòng chọn món trước",alertDone:(n,c,sum)=>`Xong: ${n} phần · ${c} ${fmt(sum)}`,
+      statsTitle:"[Thống kê hôm nay]",statsNone:"(Không có chi tiết)",
+      enterPin:"Nhập mã PIN quản trị",wrongPin:"PIN sai",noOrderToCancel:"Không có đơn để hủy",cancelSuccess:(c,a)=>`Đã hủy đơn: -${c} ${fmt(a)}`
+  }
+};
+let LANG = localStorage.getItem('lyx_lang') || 'zh';
+function setLang(l){
+  LANG=l; localStorage.setItem('lyx_lang', l);
+  const t=i18n[LANG];
+  document.getElementById('btn-zh').classList.toggle('active', l==='zh');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-vi').classList.toggle('active', l==='vi');
+  document.getElementById('brand').innerHTML = `${t.brandCN} <small>${t.brandEN}</small>`;
+  document.getElementById('chip-noodle').textContent=t.chipNoodle;
+  document.getElementById('chip-drink').textContent=t.chipDrink;
+  document.getElementById('chip-aunt').textContent=t.chipAunt;
+  document.getElementById('title-order').textContent=t.order;
+  document.getElementById('title-cart').textContent=t.cart;
+  document.getElementById('title-today').textContent=t.today;
+  document.getElementById('stat-orders-label').textContent=t.statOrders;
+  document.getElementById('stat-items-label').textContent=t.statItems;
+  document.getElementById('stat-revenue-label').textContent=t.statRevenue;
+  document.getElementById('btn-print').textContent=t.print;
+  document.getElementById('btn-print-2').textContent=t.print;
+  document.getElementById('btn-finish').textContent=t.finish;
+  document.getElementById('btn-finish-2').textContent=t.finish;
+  document.getElementById('btn-new').textContent=t.newOrder;
+  document.getElementById('btn-detail').textContent=t.detail;
+  document.getElementById('btn-exp-today').textContent=t.expToday;
+  document.getElementById('btn-exp-week').textContent=t.expWeek;
+  document.getElementById('btn-exp-month').textContent=t.expMonth;
+  document.getElementById('btn-cancel').textContent=t.cancel;
+  document.getElementById('note').placeholder=t.notePH;
+  render();
+}
+
+/* ======= 工具 ======= */
+const settings={cafeName:"龍運轩ᝰ美食中心",cafeNameEn:"LYX Food Center",currency:"RM"};
+const CURRENCY=()=>settings.currency||"RM";
+const fmt=n=>(Math.round(n*100)/100).toFixed(2);
+
+/* ======= 菜单数据 ======= */
+/* 1) 龍兴记ᝰ云吞面 */
+const NOODLES=[
+  {id:"yuntai_s", group:"noodle",
+   name:{zh:`云吞面（${i18n.zh.sizeS}）`, en:`Wonton Noodles (${i18n.en.sizeS})`, vi:`Mì hoành thánh (${i18n.vi.sizeS})`}, price:6.50},
+  {id:"yuntai_m", group:"noodle",
+   name:{zh:`云吞面（${i18n.zh.sizeM}）`, en:`Wonton Noodles (${i18n.en.sizeM})`, vi:`Mì hoành thánh (${i18n.vi.sizeM})`}, price:7.50},
+  {id:"yuntai_l", group:"noodle",
+   name:{zh:`云吞面（${i18n.zh.sizeL}）`, en:`Wonton Noodles (${i18n.en.sizeL})`, vi:`Mì hoành thánh (${i18n.vi.sizeL})`}, price:8.50},
+  {id:"wantan_dry", group:"noodle",
+   name:{zh:"云吞ᝰ干捞（一份）", en:"Wonton (Dry) - 1 plate", vi:"Hoành Thánh Khô (1 phần)"}, price:5.00},
+  {id:"wantan_soup", group:"noodle",
+   name:{zh:"云吞ᝰ汤（一份）", en:"Wonton (Soup) - 1 bowl", vi:"Hoành Thánh Nước (1 phần)"}, price:5.00},
+  {id:"wantan_add3", group:"noodle",
+   name:{zh:"加料：云吞 3 个", en:"Add-on: 3 Wontons", vi:"Thêm: 3 hoành thánh"}, price:1.00}
+];
+
+/* 2) 饮料（热价；冰 +0.20；罐装 RM3.00） */
+const DRINK_BASE=[
+  {key:"coffee",  name:{zh:"咖啡",   en:"Coffee",     vi:"Cà phê"},      price:2.30},
+  {key:"coffee_c",name:{zh:"咖啡C",  en:"Coffee C",   vi:"Cà phê C"},    price:2.50},
+  {key:"coffee_o",name:{zh:"咖啡O",  en:"Coffee O",   vi:"Cà phê O"},    price:2.00},
+  {key:"tea_milk",name:{zh:"奶茶",   en:"Milk Tea",   vi:"Trà sữa"},     price:2.30},
+  {key:"tea_c",   name:{zh:"奶茶C",  en:"Milk Tea C", vi:"Trà sữa C"},   price:2.50},
+  {key:"tea_salt",name:{zh:"奶茶咸C",en:"Milk Tea (Salted C)", vi:"Trà sữa mặn (C)"}, price:2.50},
+  {key:"milo",    name:{zh:"Milo",   en:"Milo",       vi:"Milo"},        price:2.60},
+  {key:"milo_c",  name:{zh:"Milo C", en:"Milo C",     vi:"Milo C"},      price:2.80},
+  {key:"milo_o",  name:{zh:"Milo O", en:"Milo O",     vi:"Milo O"},      price:2.60}
+];
+const CANNED=[{key:"canned", name:{zh:"罐装水",en:"Canned Water",vi:"Nước lon"}, price:3.00}];
+function buildDrinks(){
+  const t=i18n[LANG], list=[];
+  DRINK_BASE.forEach(d=>{
+    list.push({id:`drink_${d.key}_hot`,group:"drink",
+      name:{zh:`${d.name.zh}（${t.hot}）`,en:`${d.name.en} (${i18n.en.hot})`,vi:`${d.name.vi} (${i18n.vi.hot})`},price:d.price});
+    list.push({id:`drink_${d.key}_ice`,group:"drink",
+      name:{zh:`${d.name.zh}（${t.ice}）`,en:`${d.name.en} (${i18n.en.ice})`,vi:`${d.name.vi} (${i18n.vi.ice})`},price:parseFloat((d.price+0.20).toFixed(2))});
+  });
+  CANNED.forEach(c=>list.push({id:`drink_${c.key}`,group:"drink",name:c.name,price:c.price}));
+  return list;
+}
+
+/* 3) 婶婶档（来自照片清单，不含图片上传） */
+const AUNT=[
+  {id:"bh_bitter",  name:{zh:"苦瓜米粉",en:"Bitter Gourd Beehoon",vi:"Bún khổ qua"}, price:6.00},
+  {id:"nasi_lemak_chicken", name:{zh:"Nasi Lemak（有鸡肉）",en:"Nasi Lemak (Chicken)",vi:"Cơm dừa (gà)"}, price:6.00},
+  {id:"nasi_lemak_egg",     name:{zh:"Nasi Lemak（只有鸡蛋）",en:"Nasi Lemak (Egg only)",vi:"Cơm dừa (trứng)"}, price:3.00},
+  {id:"mee_fengao", name:{zh:"面粉糕",en:"Pan Mee (Hand-pulled)",vi:"Mì bột kéo"}, price:6.00},
+  {id:"braised_rice", name:{zh:"红烧饭",en:"Braised Rice",vi:"Cơm kho"}, price:6.00},
+  {id:"fish_pork_congee", name:{zh:"鱼粥（猪肉）",en:"Fish Congee (Pork)",vi:"Cháo cá (thịt heo)"}, price:6.00},
+  {id:"fish_chicken_congee", name:{zh:"鱼粥（鸡肉）",en:"Fish Congee (Chicken)",vi:"Cháo cá (gà)"}, price:6.00},
+  {id:"mee_sua", name:{zh:"面线",en:"Mee Sua",vi:"Mì gạo sợi nhỏ"}, price:6.00},
+  {id:"lu_rou_fan", name:{zh:"卤肉饭",en:"Braised Pork Rice",vi:"Cơm thịt kho"}, price:6.00},
+  {id:"kuey_teow_soup", name:{zh:"果条汤",en:"Kuey Teow Soup",vi:"Hủ tiếu nước"}, price:6.00}
+];
+
+/* ======= 购物车 ======= */
+let MENU=[]; // 运行时汇总
+let cart={};
+const findItem=id=>MENU.find(x=>x.id===id)||null;
+const nameByLang=it=>it.name?.[LANG] || it.name?.zh || it.name || '';
+function add(id){cart[id]=(cart[id]||0)+1; render();}
+function dec(id){if(!cart[id])return; cart[id]--; if(cart[id]<=0) delete cart[id]; render();}
+function clearCart(){cart={}; render();}
+
+/* ======= 渲染 ======= */
+function itemCard(it){
+  const qty=cart[it.id]||0;
+  return `<div class="item">
+    <div class="left">
+      <div class="title">${nameByLang(it)}</div>
+      <div class="price-badge">${CURRENCY()} ${fmt(it.price)}</div>
+    </div>
+    <div>
+      <button class="btn small" onclick="dec('${it.id}')">－</button>
+      <span class="qty">${qty}</span>
+      <button class="btn small" onclick="add('${it.id}')">＋</button>
+    </div>
+  </div>`;
+}
+function renderMenu(){
+  const t=i18n[LANG];
+  MENU=[...NOODLES, ...buildDrinks(), ...AUNT];
+  let html="";
+  html+=`<div id="noodle" class="group-title">${t.groupNoodle}<small>${t.hintTapAdd}</small></div>`;
+  html+=`<div class="cards">${NOODLES.map(itemCard).join('')}</div>`;
+  html+=`<div id="drink" class="group-title">${t.groupDrink}<small>${t.hintTapAdd}</small></div>`;
+  html+=`<div class="cards">${buildDrinks().map(itemCard).join('')}</div>`;
+  html+=`<div id="aunt" class="group-title">${t.groupAunt}<small>${t.hintTapAdd}</small></div>`;
+  html+=`<div class="cards">${AUNT.map(itemCard).join('')}</div>`;
+  document.getElementById("menuArea").innerHTML=html;
+}
+function renderCart(){
+  const t=i18n[LANG], node=document.getElementById("cart");
+  node.innerHTML=""; let subtotal=0, items=0;
+  for(const id in cart){
+    const it=findItem(id); if(!it) continue;
+    const q=cart[id], line=it.price*q; subtotal+=line; items+=q;
+    const row=document.createElement("div");
+    row.className="item";
+    row.innerHTML=`<div class="left"><div class="title">${nameByLang(it)} × ${q}</div>
+                   <div class="price-badge">${CURRENCY()} ${fmt(it.price)}</div></div>
+                   <div style="font-weight:900">${CURRENCY()} ${fmt(line)}</div>`;
+    node.appendChild(row);
+  }
+  const sum=document.createElement("div");
+  sum.className="sum";
+  sum.innerHTML=`<div class="cart-total">${t.sums(items, subtotal, CURRENCY())}</div>`;
+  node.appendChild(sum);
+  document.getElementById("miniTotal").textContent=t.sums(items, subtotal, CURRENCY());
+}
+function render(){ renderMenu(); renderCart(); updateStatsUI(); }
+
+/* ======= 发单 & 打印 ======= */
+function buildOrderMessage(){
+  const t=i18n[LANG]; let lines=[], total=0;
+  for(const id in cart){ const it=findItem(id); if(!it) continue;
+    const q=cart[id], line=it.price*q; total+=line;
+    lines.push(`- ${nameByLang(it)} × ${q} = ${CURRENCY()} ${fmt(line)}`);
+  }
+  const note=(document.getElementById('note').value||'').trim();
+  const head=t.msgHeader(settings.cafeName, settings.cafeNameEn);
+  return `${head}\n\n${lines.join('\n')}\n\n${t.printTotal} ${CURRENCY()} ${fmt(total)}\n${note?('Notes/备注: '+note):''}`;
+}
+function sendToGroup(text){
+  const encoded=encodeURIComponent(text);
+  const appUrl='whatsapp://send?text='+encoded;
+  const webUrl='https://wa.me/?text='+encoded;
+  let ok=false; try{const w=window.open(appUrl,'_blank'); ok=!!w;}catch(e){}
+  setTimeout(()=>{ if(!ok) window.open(webUrl,'_blank'); }, 450);
+}
+function printReceipt(){
+  if(Object.keys(cart).length===0){ alert(i18n[LANG].alertAddFirst); return; }
+  let body="", total=0;
+  for(const id in cart){ const it=findItem(id); if(!it) continue;
+    const q=cart[id], line=it.price*q; total+=line;
+    body+=`<div>${nameByLang(it)} × ${q}<span style="float:right">${CURRENCY()} ${fmt(line)}</span></div>`;
+  }
+  const html=`<div style="max-width:360px;margin:0 auto;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace">
+    <div style="text-align:center;margin-bottom:6px"><div style="font-size:18px;font-weight:900">${settings.cafeName}</div>
+      <div style="font-size:14px;font-weight:700">${settings.cafeNameEn}</div></div>
+    <div style="border-top:2px dashed #999;margin:6px 0"></div>
+    <div>Time: ${new Date().toLocaleString()}</div>
+    <div style="border-top:1px solid #777;margin:6px 0"></div>${body}
+    <div style="border-top:1px dashed #aaa;margin:8px 0"></div>
+    <div style="font-weight:900">${i18n[LANG].printTotal} ${CURRENCY()} ${fmt(total)}</div></div>`;
+  const area=document.getElementById('print-area'); area.style.display='block'; area.innerHTML=html;
+  window.print(); area.style.display='none';
+}
+function finalizeOrder(){
+  const t=i18n[LANG];
+  if(Object.keys(cart).length===0){ alert(t.alertAddFirst); return; }
+  const msg=buildOrderMessage(); const r=recordSale();
+  sendToGroup(msg); printReceipt(); clearCart();
+  alert(t.alertDone(r.itemsCount, CURRENCY(), r.subtotal));
+}
+
+/* ======= 统计 & 删单（需 PIN，只撤销上一单） ======= */
+function keyFor(d){const Y=d.getFullYear(),M=String(d.getMonth()+1).padStart(2,'0'),D=String(d.getDate()).padStart(2,'0');return `lyx_stats_${Y}-${M}-${D}`;}
+function loadStats(k){try{return JSON.parse(localStorage.getItem(k)||'{"orders":0,"items":0,"revenue":0,"detail":{},"log":[]}');}catch(e){return {"orders":0,"items":0,"revenue":0,"detail":{},"log":[]};}}
+function saveStats(k,s){localStorage.setItem(k,JSON.stringify(s));}
+function updateStatsUI(){const s=loadStats(keyFor(new Date()));document.getElementById('st_orders').textContent=s.orders||0;document.getElementById('st_items').textContent=s.items||0;document.getElementById('st_revenue').textContent=CURRENCY()+' '+fmt(s.revenue||0);}
+function recordSale(){
+  const k=keyFor(new Date()), s=loadStats(k); let items=0, sub=0, orderItems={};
+  for(const id in cart){const it=findItem(id); if(!it) continue; const q=cart[id]; items+=q; sub+=it.price*q; s.detail[id]=(s.detail[id]||0)+q; orderItems[id]=q;}
+  s.orders=(s.orders||0)+1; s.items=(s.items||0)+items; s.revenue=(s.revenue||0)+sub;
+  s.log.push({ts:Date.now(),items:orderItems,itemsCount:items,subtotal:sub}); saveStats(k,s); updateStatsUI();
+  return {itemsCount:items, subtotal:sub};
+}
+function cancelLastOrder(){
+  const t=i18n[LANG], pin=prompt(t.enterPin); if(pin===null) return; if(pin!==ADMIN_PIN){alert(t.wrongPin);return;}
+  const k=keyFor(new Date()), s=loadStats(k); if(!s.log.length){alert(t.noOrderToCancel);return;}
+  const last=s.log.pop(); s.orders=Math.max(0,(s.orders||0)-1); s.items=Math.max(0,(s.items||0)-(last.itemsCount||0)); s.revenue=Math.max(0,(s.revenue||0)-(last.subtotal||0));
+  for(const id in last.items){s.detail[id]=(s.detail[id]||0)-last.items[id]; if(s.detail[id]<=0) delete s.detail[id];}
+  saveStats(k,s); updateStatsUI(); alert(t.cancelSuccess(CURRENCY(), last.subtotal||0));
+}
+function openStatsDetail(){
+  const t=i18n[LANG], s=loadStats(keyFor(new Date()));
+  const lines=Object.keys(s.detail||{}).map(id=>{const it=findItem(id)||{name:{zh:id,en:id,vi:id}};return `${nameByLang(it)} × ${s.detail[id]}`;});
+  alert(`${t.statsTitle}\n${t.statOrders}：${s.orders||0}\n${t.statItems}：${s.items||0}\n${t.statRevenue}：${CURRENCY()} ${fmt(s.revenue||0)}\n\n`+(lines.length?lines.join('\n'):t.statsNone));
+}
+
+/* ======= 导出 CSV（今日/周/月） ======= */
+function toCSV(rows,name){const esc=v=>{const t=String(v??'');return /[",\n]/.test(t)?`"${t.replace(/"/g,'""')}"`:t;};const csv='\uFEFF'+rows.map(r=>r.map(esc).join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportTodayCSV(){exportPeriodCSV([keyFor(new Date())],'today');}
+function exportWeekCSV(){const d=new Date();const dow=d.getDay()||7;const start=new Date(d);start.setDate(d.getDate()-dow+1);const keys=[];for(let t=new Date(start);t<=d;t.setDate(t.getDate()+1)){keys.push(keyFor(new Date(t)));}exportPeriodCSV(keys,'week');}
+function exportMonthCSV(){const d=new Date();const start=new Date(d.getFullYear(),d.getMonth(),1);const keys=[];for(let t=new Date(start);t<=d;t.setDate(t.getDate()+1)){keys.push(keyFor(new Date(t)));}exportPeriodCSV(keys,'month');}
+function exportPeriodCSV(keys,label){const rows=[[settings.cafeName,settings.cafeNameEn],[label.toUpperCase(),'Report'],[]];rows.push(['Date','Orders','Items','Revenue']);let O=0,I=0,R=0;keys.forEach(k=>{const s=loadStats(k);if((s.orders||0)+(s.items||0)+(s.revenue||0)>0){rows.push([k.replace('lyx_stats_',''),s.orders||0,s.items||0,CURRENCY()+' '+fmt(s.revenue||0)]);O+=s.orders||0;I+=s.items||0;R+=s.revenue||0;}});rows.push([]);rows.push(['TOTAL',O,I,CURRENCY()+' '+fmt(R)]);toCSV(rows,`${label}_sales.csv`);}
+
+/* 启动 */
+setLang(LANG);
+</script>
+</body>
+</html>
