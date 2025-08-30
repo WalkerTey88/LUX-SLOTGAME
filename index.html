@@ -1,519 +1,111 @@
 <!DOCTYPE html>
-<html lang="zh" translate="no">
+<html lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>龍運轩ᝰ美食中心 · LYX Food Center</title>
-<meta name="color-scheme" content="light dark">
 <style>
-:root{
-  --bg:#f7f8fb;--card:#fff;--ink:#0f172a;--mut:#6b7280;--line:#e5e7eb;
-  --brand:#0ea5e9;--ok:#059669;--accent:#f59e0b;
-  --shadow:0 8px 24px rgba(2,8,23,.06)
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-a{text-decoration:none;color:inherit}
-.wrap{max-width:1200px;margin:20px auto;padding:0 12px 24px}
-header{position:sticky;top:0;z-index:9;background:linear-gradient(180deg,#0ea5e9,#0284c7);color:#fff;padding:14px 16px}
-h1{margin:0;font-size:20px;letter-spacing:.5px;display:flex;gap:10px;align-items:baseline}
+:root{--bg:#f7f8fb;--card:#fff;--ink:#0f172a;--mut:#6b7280;--line:#e5e7eb;--brand:#0ea5e9;--ok:#059669;--accent:#f59e0b;--shadow:0 8px 24px rgba(2,8,23,.06)}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(180deg,#0ea5e9,#0284c7);color:#fff;padding:12px;position:sticky;top:0;z-index:9}
+h1{margin:0;font-size:20px;display:flex;gap:10px;align-items:baseline}
 h1 small{opacity:.9}
-.lang{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.lang button{padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-weight:700}
+.lang{margin-top:8px;display:flex;gap:8px}
+.lang button{padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;font-weight:700;cursor:pointer}
 .lang button.active{background:#fff;color:#0b3a55}
-
-.grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
-@media (max-width:980px){.grid{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-.panel h3{margin:0;padding:14px 16px;border-bottom:1px solid var(--line);font-size:16px;display:flex;align-items:center;gap:8px}
-.section{padding:12px 12px 18px}
-
-.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin:0 6px 10px}
-.label{font-weight:700}
-.input{padding:10px;border:1px solid var(--line);border-radius:12px;min-width:140px}
-.switch{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff}
-
-details{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:#fff}
-summary{list-style:none;cursor:pointer;padding:12px 14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;background:#fff7ed;border-left:4px solid var(--accent)}
-summary::marker,summary::-webkit-details-marker{display:none}
-.cat-sub{color:#a16207;font-weight:600;font-size:12px}
-
-.cards{padding:10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-@media (max-width:720px){.cards{grid-template-columns:1fr}}
-
-.item{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;display:flex;gap:12px;align-items:center}
-.item .left{flex:1}
-.title{font-weight:900}
-.sub{color:var(--mut);font-size:12px;line-height:1.25}
-.qty{min-width:56px;text-align:center;font-weight:900}
-
-.btn{padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
-.btn.small{padding:10px 14px;font-size:18px;border-width:2px}
-.btn.add{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:800}
-
-.sticky{position:sticky;top:86px}
-.sumrow{display:flex;gap:10px;margin-top:10px}
-.sumrow .btn.print{flex:1;background:#1d4ed8;border-color:#1d4ed8;color:#fff}
-.sumrow .btn.done{flex:3;background:var(--ok);border-color:var(--ok);color:#fff}
-.note{width:100%;min-height:68px;border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:10px}
-.sum{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
-
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.kpi{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;text-align:center}
-.kpi b{display:block;font-size:18px}
-
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-
-.tag{font-size:11px;border:1px solid var(--line);color:var(--mut);padding:2px 6px;border-radius:999px}
-
-.hidden{display:none}
+.wrap{display:grid;grid-template-columns:2fr 1fr;gap:12px;padding:12px;max-width:1200px;margin:auto}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:10px}
+.item{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.qty{min-width:40px;text-align:center;font-weight:900}
+.btn{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#f3f4f6;cursor:pointer}
+.btn.add{background:var(--brand);color:#fff;font-weight:800}
+.btn.small{font-size:18px;padding:6px 12px}
+summary{cursor:pointer;font-weight:bold;padding:8px;background:#fff7ed;border-left:4px solid var(--accent);border-radius:10px;margin-bottom:6px}
 </style>
 </head>
 <body>
 <header>
   <h1><span data-i18n="appName">龍運轩ᝰ美食中心</span> <small data-i18n="appNameEn">LYX Food Center</small></h1>
   <div class="lang">
-    <button id="btn-zh" class="active" onclick="applyLang('zh')" data-i18n="lang_zh">中文</button>
-    <button id="btn-en" onclick="applyLang('en')" data-i18n="lang_en">English</button>
-    <button id="btn-vi" onclick="applyLang('vi')" data-i18n="lang_vi">Tiếng Việt</button>
+    <button id="btn-zh" onclick="applyLang('zh')">中文</button>
+    <button id="btn-en" onclick="applyLang('en')">English</button>
+    <button id="btn-vi" onclick="applyLang('vi')">Tiếng Việt</button>
   </div>
 </header>
 
-<div class="wrap grid">
-  <!-- 左 -->
+<div class="wrap">
+  <!-- 左：菜单 -->
   <section class="panel">
     <h3 data-i18n="orderTitle">点餐 / Order</h3>
-    <div class="section">
-      <div class="controls">
-        <label class="label" data-i18n="tableNo">桌号</label>
-        <input id="tableNo" class="input" placeholder="A1">
-        <label class="switch">
-          <input type="checkbox" id="takeaway">
-          <span data-i18n="takeaway">外带</span>
-        </label>
-      </div>
 
-      <!-- 龍兴记ᝰ云吞面 -->
-      <details>
-        <summary>
-          <span data-i18n="cat_wonton">龍兴记ᝰ云吞面</span>
-          <span class="cat-sub" data-i18n="subTap">点击展开/收起</span>
-        </summary>
-        <div class="cards" id="cat-wonton"></div>
-      </details>
-
-      <!-- 饮料 -->
-      <details>
-        <summary>
-          <span data-i18n="cat_drinks">饮料</span>
-          <span class="cat-sub" data-i18n="ruleCaption">规则见小字</span>
-        </summary>
-        <div class="section" style="padding:10px 14px">
-          <div class="sub" data-i18n="rule_ice">全部饮料「冰」另加 RM0.20（罐装水除外）</div>
-          <div class="sub" data-i18n="rule_canned">罐装水统一 RM3.00</div>
-        </div>
-        <div class="cards" id="cat-drinks"></div>
-      </details>
-
-      <!-- 婶婶档 -->
-      <details>
-        <summary>
-          <span data-i18n="cat_auntie">婶婶档</span>
-          <span class="cat-sub" data-i18n="subTap">点击展开/收起</span>
-        </summary>
-        <div class="cards" id="cat-auntie"></div>
-      </details>
-    </div>
+    <details open><summary data-i18n="cat_wonton">龍兴记ᝰ云吞面</summary><div id="cat-wonton"></div></details>
+    <details><summary data-i18n="cat_drinks">饮料</summary><small data-i18n="rule">冰 +RM0.20，罐装水 RM3.00</small><div id="cat-drinks"></div></details>
+    <details><summary data-i18n="cat_auntie">婶婶档</summary><div id="cat-auntie"></div></details>
+    <details><summary data-i18n="cat_gx">广西卷筒粉</summary><div id="cat-gx"></div></details>
   </section>
 
   <!-- 右：订单 -->
-  <aside class="panel sticky">
+  <aside class="panel">
     <h3 data-i18n="cartTitle">订单 / Cart</h3>
-    <div id="cart" class="section"></div>
-    <div class="section">
-      <label class="label" data-i18n="notes">备注（例：少甜 / 少冰 / 加辣）</label>
-      <textarea id="note" class="note" placeholder=""></textarea>
-      <div class="sumrow">
-        <button class="btn print" onclick="printReceipt()" data-i18n="print">打印小票</button>
-        <button class="btn done" onclick="finishAndSend()" data-i18n="complete_stats_group">完成并统计（群聊）</button>
-      </div>
-
-      <div class="kpis">
-        <div class="kpi"><span data-i18n="ordersCount">订单笔数</span><b id="kpi-orders">0</b></div>
-        <div class="kpi"><span data-i18n="itemsSold">售出件数</span><b id="kpi-items">0</b></div>
-        <div class="kpi"><span data-i18n="salesAmount">销售金额</span><b id="kpi-sales">RM 0.00</b></div>
-      </div>
-      <div class="tools">
-        <button class="btn" onclick="viewToday()" data-i18n="viewDetail">查看明细</button>
-        <button class="btn" onclick="exportCSV('today')" data-i18n="exportToday">导出今日 CSV</button>
-        <button class="btn" onclick="exportCSV('week')" data-i18n="exportWeek">导出本周 CSV</button>
-        <button class="btn" onclick="exportCSV('month')" data-i18n="exportMonth">导出本月 CSV</button>
-        <button class="btn" onclick="deleteWithPwd()" data-i18n="deleteNeedPwd">删单（需密码）</button>
-      </div>
+    <div id="cart"></div>
+    <textarea id="note" placeholder="备注 Notes" style="width:100%;margin-top:8px"></textarea>
+    <button class="btn add" style="margin-top:8px;width:100%" onclick="finishAndSend()" data-i18n="complete">完成并统计</button>
+    <div style="margin-top:10px">
+      <div><span data-i18n="ordersCount">订单数</span>: <b id="kpi-orders">0</b></div>
+      <div><span data-i18n="itemsSold">件数</span>: <b id="kpi-items">0</b></div>
+      <div><span data-i18n="salesAmount">销售额</span>: <b id="kpi-sales">RM 0.00</b></div>
     </div>
+    <details style="margin-top:10px"><summary data-i18n="breakdown">分类统计</summary><div id="breakdown"></div></details>
+    <button class="btn" style="margin-top:6px" onclick="deleteWithPwd()" data-i18n="deleteNeedPwd">删单（需密码）</button>
   </aside>
 </div>
 
-<!-- 打印区 -->
-<div id="print-area" class="hidden"></div>
-
 <script>
-/* ============ 多语言翻译表 ============ */
-const i18n = {
-  zh: {
-    appName:"龍運轩ᝰ美食中心", appNameEn:"LYX Food Center",
-    lang_zh:"中文", lang_en:"English", lang_vi:"Tiếng Việt",
-    orderTitle:"点餐 / Order", cartTitle:"订单 / Cart",
-    cat_wonton:"龍兴记ᝰ云吞面", cat_drinks:"饮料", cat_auntie:"婶婶档",
-    subTap:"点击展开/收起", ruleCaption:"规则见小字",
-    rule_ice:"全部饮料「冰」另加 RM0.20（罐装水除外）",
-    rule_canned:"罐装水统一 RM3.00",
-    tableNo:"桌号", takeaway:"外带", dinein:"堂食",
-    notes:"备注（例：少甜 / 少冰 / 加辣）",
-    add:"加入", plus:"+", minus:"-",
-    print:"打印小票", complete_stats_group:"完成并统计（群聊）",
-    ordersCount:"订单笔数", itemsSold:"售出件数", salesAmount:"销售金额",
-    viewDetail:"查看明细", exportToday:"导出今日 CSV",
-    exportWeek:"导出本周 CSV", exportMonth:"导出本月 CSV",
-    deleteNeedPwd:"删单（需密码）", password:"密码",
-    confirm:"确认", cancel:"取消", ok:"完成", err:"错误",
-    delSuccess:"删除成功", delFail:"密码错误，删除失败",
-    hot:"（热）", iced:"（冰）"
-  },
-  en: {
-    appName:"LYX Food Center", appNameEn:"LYX Food Center",
-    lang_zh:"中文", lang_en:"English", lang_vi:"Tiếng Việt",
-    orderTitle:"Order", cartTitle:"Cart",
-    cat_wonton:"Long Hing Ji · Wonton Noodles",
-    cat_drinks:"Drinks", cat_auntie:"Auntie's Stall",
-    subTap:"Tap to toggle", ruleCaption:"See notes",
-    rule_ice:"All drinks +RM0.20 for iced (except canned).",
-    rule_canned:"Canned drinks RM3.00 flat.",
-    tableNo:"Table No.", takeaway:"Takeaway", dinein:"Dine-in",
-    notes:"Notes (e.g., less sugar / less ice / extra spicy)",
-    add:"Add", plus:"+", minus:"-",
-    print:"Print Receipt", complete_stats_group:"Complete & Send (Group)",
-    ordersCount:"Orders", itemsSold:"Items Sold", salesAmount:"Sales Amount",
-    viewDetail:"View Details", exportToday:"Export Today CSV",
-    exportWeek:"Export This Week CSV", exportMonth:"Export This Month CSV",
-    deleteNeedPwd:"Delete (password)", password:"Password",
-    confirm:"Confirm", cancel:"Cancel", ok:"Done", err:"Error",
-    delSuccess:"Deleted", delFail:"Wrong password",
-    hot:" (Hot)", iced:" (Iced)"
-  },
-  vi: {
-    appName:"Trung Tâm Ẩm Thực LYX", appNameEn:"LYX Food Center",
-    lang_zh:"中文", lang_en:"English", lang_vi:"Tiếng Việt",
-    orderTitle:"Gọi món", cartTitle:"Giỏ hàng",
-    cat_wonton:"Mì hoành thánh Long Hing Ji", cat_drinks:"Nước uống", cat_auntie:"Gian hàng Cô",
-    subTap:"Chạm để mở/đóng", ruleCaption:"Xem ghi chú",
-    rule_ice:"Mọi thức uống thêm RM0.20 khi đá (trừ đồ lon).",
-    rule_canned:"Nước lon đồng giá RM3.00.",
-    tableNo:"Số bàn", takeaway:"Mang đi", dinein:"Dùng tại chỗ",
-    notes:"Ghi chú (vd: ít đường / ít đá / cay hơn)",
-    add:"Thêm", plus:"+", minus:"-",
-    print:"In hóa đơn", complete_stats_group:"Hoàn tất & gửi (Nhóm)",
-    ordersCount:"Số đơn", itemsSold:"Số món", salesAmount:"Doanh thu",
-    viewDetail:"Xem chi tiết", exportToday:"Xuất CSV hôm nay",
-    exportWeek:"Xuất CSV tuần này", exportMonth:"Xuất CSV tháng này",
-    deleteNeedPwd:"Xóa đơn (mật khẩu)", password:"Mật khẩu",
-    confirm:"Xác nhận", cancel:"Hủy", ok:"Hoàn tất", err:"Lỗi",
-    delSuccess:"Đã xóa", delFail:"Sai mật khẩu",
-    hot:" (Nóng)", iced:" (Đá)"
-  }
+/* ===== 多语言 ===== */
+const i18n={
+  zh:{appName:"龍運轩ᝰ美食中心",appNameEn:"LYX Food Center",orderTitle:"点餐 / Order",cartTitle:"订单 / Cart",cat_wonton:"龍兴记ᝰ云吞面",cat_drinks:"饮料",cat_auntie:"婶婶档",cat_gx:"广西卷筒粉",rule:"冰 +RM0.20，罐装水 RM3.00",complete:"完成并统计",ordersCount:"订单数",itemsSold:"件数",salesAmount:"销售额",breakdown:"分类统计",deleteNeedPwd:"删单（需密码）"},
+  en:{appName:"LYX Food Center",appNameEn:"LYX Food Center",orderTitle:"Order",cartTitle:"Cart",cat_wonton:"Wonton Noodles",cat_drinks:"Drinks",cat_auntie:"Auntie's Stall",cat_gx:"Guangxi Rolls",rule:"Iced +RM0.20, Canned RM3.00",complete:"Finish & Save",ordersCount:"Orders",itemsSold:"Items",salesAmount:"Sales",breakdown:"Breakdown",deleteNeedPwd:"Delete (password)"},
+  vi:{appName:"Trung Tâm Ẩm Thực LYX",appNameEn:"LYX Food Center",orderTitle:"Gọi món",cartTitle:"Giỏ hàng",cat_wonton:"Mì hoành thánh",cat_drinks:"Nước uống",cat_auntie:"Gian hàng Cô",cat_gx:"Bánh cuốn Quảng Tây",rule:"Đá +RM0.20, nước lon RM3.00",complete:"Hoàn tất & lưu",ordersCount:"Đơn hàng",itemsSold:"Số món",salesAmount:"Doanh thu",breakdown:"Thống kê",deleteNeedPwd:"Xóa (mật khẩu)"}
 };
-let currentLang = localStorage.getItem("lyx_lang") || "zh";
-function t(k){ return (i18n[currentLang]||i18n.zh)[k] ?? k; }
-function applyLang(lang){
-  currentLang = ["zh","en","vi"].includes(lang)?lang:"zh";
-  localStorage.setItem("lyx_lang", currentLang);
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const k=el.getAttribute("data-i18n");
-    if(el.dataset.i18nTarget==="placeholder"){ el.placeholder=t(k); }
-    else{ el.textContent=t(k); }
-  });
-  document.getElementById('btn-zh').classList.toggle('active',currentLang==="zh");
-  document.getElementById('btn-en').classList.toggle('active',currentLang==="en");
-  document.getElementById('btn-vi').classList.toggle('active',currentLang==="vi");
-  renderAll();
+let currentLang=localStorage.getItem("lang")||"zh";
+function t(k){return (i18n[currentLang]||i18n.zh)[k]||k;}
+function applyLang(lang){currentLang=lang;localStorage.setItem("lang",lang);
+  document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  renderAll();showKpis();
+  document.getElementById("btn-zh").classList.toggle("active",lang==="zh");
+  document.getElementById("btn-en").classList.toggle("active",lang==="en");
+  document.getElementById("btn-vi").classList.toggle("active",lang==="vi");
 }
 
-/* ============ 菜单数据 ============ */
-/* —— 龍兴记ᝰ云吞面 —— */
-const WONTON = [
-  {id:"w_noodle_soup_L",  name_zh:"云吞面 汤（大）", name_en:"Wonton Noodle Soup (L)", name_vi:"Mì hoành thánh nước (L)", price:8.50, unit:"pc"},
-  {id:"w_wantan_dry",     name_zh:"云吞 干捞（一份）", name_en:"Wantan Dry (1 portion)", name_vi:"Hoành thánh khô (1 phần)", price:5.00, unit:"pc"},
-  {id:"w_wantan_soup",    name_zh:"云吞 汤（一份）",   name_en:"Wantan Soup (1 portion)", name_vi:"Hoành thánh nước (1 phần)", price:5.00, unit:"pc"},
-  {id:"w_addon_3",        name_zh:"加料：云吞 ×3",   name_en:"Add-on: 3 Wantans", name_vi:"Thêm: 3 hoành thánh", price:1.00, unit:"pc"}
-];
+/* ===== 菜单 ===== */
+const WONTON=[{id:"w1",name:{zh:"云吞面汤",en:"Wonton Soup Noodle",vi:"Mì hoành thánh nước"},price:6.5}];
+const DRINKS=[{id:"d1",name:{zh:"咖啡(热)",en:"Coffee (Hot)",vi:"Cà phê (Nóng)"},price:2.3},{id:"d2",name:{zh:"咖啡(冰)",en:"Coffee (Iced)",vi:"Cà phê (Đá)"},price:2.5},{id:"d_canned",name:{zh:"罐装水",en:"Canned Drink",vi:"Nước lon"},price:3}];
+const AUNTIE=[{id:"a1",name:{zh:"鸡肉粥",en:"Chicken Congee",vi:"Cháo gà"},price:6}];
+const GX=[{id:"g1",name:{zh:"素粉",en:"Plain Roll",vi:"Bánh cuốn chay"},price:1},{id:"g2",name:{zh:"肉卷筒粉",en:"Meat Roll",vi:"Bánh cuốn thịt"},price:3}];
 
-/* —— 饮料 —— */
-const DRINKS = [
-  // 名称, 热价, 冰价（若为 null 表示无该温度）, canned 固定价
-  {id:"d_coffee",     base:"咖啡",     hot:2.30, iced:2.50},
-  {id:"d_coffee_c",   base:"咖啡C",    hot:2.50, iced:2.70},
-  {id:"d_coffee_o",   base:"咖啡O",    hot:2.00, iced:2.20},
-  {id:"d_milktea",    base:"奶茶",     hot:2.30, iced:2.50},
-  {id:"d_milktea_c",  base:"奶茶C",    hot:2.50, iced:2.70},
-  {id:"d_milktea_sc", base:"奶茶咸C",  hot:2.50, iced:2.70},
-  {id:"d_milo",       base:"Milo",     hot:2.60, iced:2.80},
-  {id:"d_milo_c",     base:"Milo C",   hot:2.80, iced:3.00},
-  {id:"d_milo_o",     base:"Milo O",   hot:2.60, iced:2.80},
-];
-const CANNED = {id:"d_canned", name_zh:"罐装水", name_en:"Canned Drinks", name_vi:"Nước lon", price:3.00};
+/* ===== 渲染 ===== */
+const cart={items:{}};
+function itemCard(it){const id=it.id;return `<div class="item"><span>${it.name[currentLang]} RM${it.price}</span><div><button class="btn small" onclick="dec('${id}')">-</button><span class="qty" id="qty-${id}">${cart.items[id]||0}</span><button class="btn small" onclick="inc('${id}')">+</button></div></div>`;}
+function renderCat(id,list){document.getElementById(id).innerHTML=list.map(itemCard).join("");}
+function renderAll(){renderCat("cat-wonton",WONTON);renderCat("cat-drinks",DRINKS);renderCat("cat-auntie",AUNTIE);renderCat("cat-gx",GX);renderCart();}
+function inc(id){cart.items[id]=(cart.items[id]||0)+1;renderCart();}
+function dec(id){if(!cart.items[id])return;cart.items[id]--;if(cart.items[id]<=0)delete cart.items[id];renderCart();}
+function renderCart(){const c=document.getElementById("cart");c.innerHTML="";let total=0;for(const id in cart.items){const qty=cart.items[id];const it=[...WONTON,...DRINKS,...AUNTIE,...GX].find(x=>x.id===id);if(!it)continue;const line=it.price*qty;total+=line;c.innerHTML+=`<div>${it.name[currentLang]} × ${qty} = RM${line.toFixed(2)}</div>`;}c.innerHTML+=`<div><b>Total RM${total.toFixed(2)}</b></div>`;}
 
-/* —— 婶婶档 ——（按你给的清单） */
-const AUNTIE = [
-  {id:"a_bitter_rice_noodle", name_zh:"苦瓜米粉", name_en:"Bitter Gourd Rice Vermicelli", name_vi:"Bún gạo khổ qua", price:6.00, unit:"pc"},
-  {id:"a_nasi_ayam",          name_zh:"Nasi Lemak（有鸡肉）", name_en:"Nasi Lemak (Chicken)", name_vi:"Nasi Lemak (gà)", price:6.00, unit:"pc"},
-  {id:"a_nasi_egg",           name_zh:"Nasi Lemak（只有鸡蛋）", name_en:"Nasi Lemak (Egg only)", name_vi:"Nasi Lemak (trứng)", price:3.00, unit:"pc"},
-  {id:"a_mian_fen_gao",       name_zh:"面粉糕", name_en:"Pan Mee", name_vi:"Bánh bột mì", price:6.00, unit:"pc"},
-  {id:"a_hongshao_fan",       name_zh:"红烧饭", name_en:"Braised Pork Rice", name_vi:"Cơm thịt kho", price:6.00, unit:"pc"},
-  {id:"a_congee_pork",        name_zh:"鱼粥（猪肉）", name_en:"Fish Congee (Pork)", name_vi:"Cháo cá (thịt heo)", price:6.00, unit:"pc"},
-  {id:"a_congee_chicken",     name_zh:"鱼粥（鸡肉）", name_en:"Fish Congee (Chicken)", name_vi:"Cháo cá (gà)", price:6.00, unit:"pc"},
-  {id:"a_mianxian",           name_zh:"面线", name_en:"Mee Sua", name_vi:"Mì sợi mảnh", price:6.00, unit:"pc"},
-  {id:"a_lu_rou_fan",         name_zh:"卤肉饭", name_en:"Lu Rou Fan", name_vi:"Cơm thịt kho Đài", price:6.00, unit:"pc"},
-  {id:"a_kuey_teow_soup",     name_zh:"果条汤", name_en:"Kuey Teow Soup", name_vi:"Hủ tiếu nước", price:6.00, unit:"pc"}
-];
+/* ===== 统计 ===== */
+function todayKey(){return "lyx_stats_"+new Date().toISOString().slice(0,10);}
+function loadStats(){return JSON.parse(localStorage.getItem(todayKey())||'{"orders":0,"items":0,"sales":0,"breakdown":{}}');}
+function saveStats(st){localStorage.setItem(todayKey(),JSON.stringify(st));showKpis();renderBreakdown();}
+function showKpis(){const st=loadStats();document.getElementById("kpi-orders").textContent=st.orders;document.getElementById("kpi-items").textContent=st.items;document.getElementById("kpi-sales").textContent="RM "+st.sales.toFixed(2);}
+function renderBreakdown(){const st=loadStats();const cats={wonton:"云吞面",drinks:"饮料",auntie:"婶婶档",gx:"广西卷筒粉"};let html="";for(const k in cats){const r=st.breakdown[k]||{qty:0,revenue:0};html+=`<div>${cats[k]}: ${r.qty} 件 / RM ${r.revenue.toFixed(2)}</div>`;}document.getElementById("breakdown").innerHTML=html;}
 
-/* ============ 渲染与购物车 ============ */
-function displayName(it){
-  if(!it) return "";
-  if(currentLang==="en") return it.name_en || it.name_zh || it.base;
-  if(currentLang==="vi") return it.name_vi || it.name_zh || it.base;
-  return it.name_zh || it.base;
-}
+/* ===== 下单 ===== */
+function finishAndSend(){let subtotal=0,items=0;const st=loadStats();for(const id in cart.items){const qty=cart.items[id];items+=qty;const it=[...WONTON,...DRINKS,...AUNTIE,...GX].find(x=>x.id===id);if(!it)continue;subtotal+=it.price*qty;let cat=id[0]==="w"?"wonton":id[0]==="d"?"drinks":id[0]==="a"?"auntie":"gx";if(!st.breakdown[cat])st.breakdown[cat]={qty:0,revenue:0};st.breakdown[cat].qty+=qty;st.breakdown[cat].revenue+=it.price*qty;}st.orders++;st.items+=items;st.sales+=subtotal;saveStats(st);cart.items={};renderCart();}
+const DELETE_PWD="Lyx115599$";function deleteWithPwd(){const p=prompt("密码 Password");if(p!==DELETE_PWD){alert("错误 Wrong password");return;}localStorage.removeItem(todayKey());alert("已删除");showKpis();renderBreakdown();}
 
-const cart = {items:{}}; // {id: qty}
-
-function inc(id){ cart.items[id]=(cart.items[id]||0)+1; renderCart(); syncQty(id); }
-function dec(id){ if(!cart.items[id]) return; cart.items[id]--; if(cart.items[id]<=0) delete cart.items[id]; renderCart(); syncQty(id); }
-
-function itemCard(it, price){
-  const title = displayName(it)+(price!=null?` — RM ${price.toFixed(2)}`:"");
-  const id = price!=null?`${it.id}_${price.toFixed(2)}`:it.id;
-  return `
-  <div class="item">
-    <div class="left">
-      <div class="title">${title}</div>
-      ${it.unit?`<div class="sub">${it.unit}</div>`:""}
-    </div>
-    <div>
-      <button class="btn small" onclick="dec('${id}')" aria-label="minus">−</button>
-      <div id="qty-${id}" class="qty">${cart.items[id]||0}</div>
-      <button class="btn small" onclick="inc('${id}')" aria-label="plus">+</button><br>
-      <button class="btn add" onclick="inc('${id}')" data-i18n="add">${t('add')}</button>
-    </div>
-  </div>`;
-}
-
-function renderCategory(elId, list, isDrink=false){
-  const el=document.getElementById(elId);
-  let html="";
-  list.forEach(it=>{
-    if(isDrink){
-      if(it.hot)  html+=itemCard({id:it.id+"_hot", name_zh:it.base+"（热）", name_en:it.base+t('hot'), name_vi:it.base+t('hot')}, it.hot);
-      if(it.iced) html+=itemCard({id:it.id+"_ice", name_zh:it.base+"（冰）",  name_en:it.base+t('iced'), name_vi:it.base+t('iced')}, it.iced);
-    }else{
-      html+=itemCard(it, it.price);
-    }
-  });
-  if(elId==="cat-drinks"){
-    // canned fixed
-    html+=itemCard(CANNED, CANNED.price);
-  }
-  el.innerHTML=html;
-}
-
-function renderAll(){
-  renderCategory('cat-wonton', WONTON);
-  renderCategory('cat-drinks', DRINKS, true);
-  renderCategory('cat-auntie', AUNTIE);
-  renderCart();
-}
-
-function priceOf(id){
-  // id 可能带 _price 后缀（饮料温度）
-  const m=id.match(/_(\d+\.\d{2})$/);
-  if(m) return parseFloat(m[1]);
-  // 非饮料：从三大类里找
-  const all=[...WONTON,...AUNTIE];
-  const f=all.find(x=>x.id===id);
-  return f?f.price:0;
-}
-
-function nameOf(id){
-  const baseId=id.replace(/_\d+\.\d{2}$/,'');
-  // 饮料热/冰
-  if(baseId.startsWith("d_")){
-    const isHot=baseId.endsWith("_hot")||id.includes("_hot");
-    const isIce=baseId.endsWith("_ice")||id.includes("_ice");
-    let base=DRINKS.find(x=> (baseId.startsWith(x.id)));
-    if(!base && baseId==="d_canned") return displayName(CANNED);
-    const nm = base? base.base : baseId;
-    if(isHot) return nm + (currentLang==="zh"?"（热）": currentLang==="en"? " (Hot)":" (Nóng)");
-    if(isIce) return nm + (currentLang==="zh"?"（冰）": currentLang==="en"? " (Iced)":" (Đá)");
-    return nm;
-  }
-  const all=[...WONTON,...AUNTIE,{...CANNED,id:CANNED.id+"_3.00"}];
-  const f=all.find(x=> id.startsWith(x.id));
-  return displayName(f||{name_zh:id});
-}
-
-function syncQty(id){
-  const q=document.getElementById('qty-'+id);
-  if(q) q.textContent=cart.items[id]||0;
-}
-
-function fmt(n){ return (Math.round(n*100)/100).toFixed(2); }
-
-function renderCart(){
-  const c=document.getElementById('cart'); c.innerHTML="";
-  let subtotal=0, items=0;
-  Object.keys(cart.items).forEach(id=>{
-    const qty=cart.items[id];
-    const line=priceOf(id)*qty; subtotal+=line; items+=qty;
-    const row=document.createElement('div'); row.className='item';
-    row.innerHTML = `
-      <div class="left"><div class="title">${nameOf(id)} × ${qty}</div></div>
-      <div style="text-align:right">
-        <div style="font-weight:900">RM ${fmt(line)}</div>
-        <div style="margin-top:6px">
-          <button class="btn small" onclick="inc('${id}')">+</button>
-          <button class="btn small" onclick="dec('${id}')">−</button>
-        </div>
-      </div>`;
-    c.appendChild(row);
-  });
-  const sum=document.createElement('div'); sum.className='sum';
-  sum.innerHTML = `<div style="font-weight:900">合计 Total: RM ${fmt(subtotal)}</div>`;
-  c.appendChild(sum);
-}
-
-/* ============ 统计存储（按天） ============ */
-function todayKey(){ const d=new Date(); const s=d.toISOString().slice(0,10); return "lyx_stats_"+s; }
-function loadStats(){
-  const raw=localStorage.getItem(todayKey());
-  return raw? JSON.parse(raw): {orders:0, items:0, sales:0, list:[]}; // list: [{time, table, takeaway, lines, total}]
-}
-function saveStats(st){ localStorage.setItem(todayKey(), JSON.stringify(st)); showKpis(); }
-function showKpis(){
-  const st=loadStats();
-  document.getElementById('kpi-orders').textContent=st.orders;
-  document.getElementById('kpi-items').textContent=st.items;
-  document.getElementById('kpi-sales').textContent="RM "+fmt(st.sales);
-}
-
-/* ============ 完成 & WhatsApp 群发（号码） ============ */
-const WA_LIST = ["60122847784","601161379373","60187794329","60187890583","60182925799"];
-
-function finishAndSend(){
-  if(Object.keys(cart.items).length===0){ alert('请先选择项目 / Please add items first'); return; }
-  const table = document.getElementById('tableNo').value || "-";
-  const type  = document.getElementById('takeaway').checked ? t('takeaway') : t('dinein');
-  const note  = (document.getElementById('note').value||"").trim();
-  let subtotal=0, lines=[], items=0;
-  Object.keys(cart.items).forEach(id=>{
-    const qty=cart.items[id]; items+=qty;
-    const line=priceOf(id)*qty; subtotal+=line;
-    lines.push(`- ${nameOf(id)} × ${qty} = RM ${fmt(line)}`);
-  });
-  // 统计入库
-  const st=loadStats();
-  st.orders+=1; st.items+=items; st.sales+=subtotal;
-  st.list.push({time:new Date().toLocaleString(), table, takeaway:type, lines, total:subtotal, note});
-  saveStats(st);
-
-  // 发送 WhatsApp（多号码依次打开）
-  const NL="%0A";
-  const title = `【${t('appName')}】订单 / Order`;
-  const msg = [
-    title, `桌号 Table: ${table}`, `类型 Type: ${type}`,'', '明细 / Items:'
-  ].concat(lines).concat(['',`合计 Total: RM ${fmt(subtotal)}`, note?('备注 Notes: '+encodeURIComponent(note)):""]).join(NL);
-  const encoded = msg; // 已包含编码的 %0A
-  WA_LIST.forEach((phone,i)=> setTimeout(()=>window.open(`https://wa.me/${phone}?text=${encoded}`,'_blank'), i*400));
-
-  // 下单后不清空历史（你说“不可改单/不要清零”），但把购物车清空以便下一单
-  cart.items={};
-  renderCart(); showKpis();
-}
-
-/* ============ 打印小票 ============ */
-function printReceipt(){
-  if(Object.keys(cart.items).length===0){ alert('没有项目 / No items'); return; }
-  const area=document.getElementById('print-area'); area.classList.remove('hidden');
-  const table=document.getElementById('tableNo').value || '-';
-  const type=document.getElementById('takeaway').checked ? t('takeaway') : t('dinein');
-  let subtotal=0, body='';
-  Object.keys(cart.items).forEach(id=>{
-    const qty=cart.items[id]; const line=priceOf(id)*qty; subtotal+=line;
-    body+=`<div>${nameOf(id)} × ${qty}<span style="float:right">RM ${fmt(line)}</span></div>`;
-  });
-  area.innerHTML = `
-  <div style="max-width:340px;margin:0 auto;font-size:13px;line-height:1.35">
-    <div style="text-align:center;font-weight:900">${t('appName')}<br><small>${t('appNameEn')}</small></div>
-    <div>时间 Time: ${new Date().toLocaleString()}</div>
-    <div>桌号 Table: ${table}</div>
-    <div>类型 Type: ${type}</div>
-    <hr>${body}<hr>
-    <div style="font-weight:900">合计 Total: RM ${fmt(subtotal)}</div>
-    <div style="text-align:center;margin-top:8px">谢谢惠顾，欢迎再次光临！<br><small>Thank you, please come again!</small></div>
-  </div>`;
-  window.print(); area.classList.add('hidden');
-}
-
-/* ============ 导出 / 查看 / 删除 ============ */
-function csvEscape(s){ return `"${String(s).replace(/"/g,'""')}"`; }
-
-function exportCSV(scope){
-  // collect days depending on scope
-  const now=new Date();
-  const getKeys=()=>{
-    const keys=[];
-    for(let i=0;i<32;i++){
-      const d=new Date(now); if(scope==="today"&&i>0) break;
-      if(scope==="week"){ d.setDate(now.getDate()-i); }
-      if(scope==="month"){ d.setDate(now.getDate()-i); }
-      const k="lyx_stats_"+d.toISOString().slice(0,10);
-      const v=localStorage.getItem(k); if(v) keys.push(k);
-      if(scope==="today") break;
-      if(scope==="week" && d.getDay()===0 && i>0) break; // until last Sunday
-      if(scope==="month"&& d.getDate()===1 && i>0) break; // until 1st
-    }
-    return keys.reverse();
-  };
-  const keys=getKeys();
-  let rows=[["date","time","table","type","item_lines","total"].map(csvEscape).join(",")];
-  keys.forEach(k=>{
-    const day=k.slice(-10), st=JSON.parse(localStorage.getItem(k)||"{}");
-    (st.list||[]).forEach(r=>{
-      rows.push([day,r.time,r.table,r.takeaway,(r.lines||[]).join(" | "), "RM "+fmt(r.total)].map(csvEscape).join(","));
-    });
-  });
-  const blob=new Blob([rows.join("\n")],{type:"text/csv;charset=utf-8"});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`lyx_${scope}_${new Date().toISOString().slice(0,10)}.csv`; a.click();
-}
-
-function viewToday(){
-  const st=loadStats(); const lines=st.list.map((r,i)=>`${i+1}. [${r.time}] ${r.table}/${r.takeaway}\n   ${r.lines.join("\n   ")}\n   Total: RM ${fmt(r.total)}${r.note?("\n   Note: "+r.note):""}`).join("\n\n");
-  alert((lines||"（暂无）") + `\n\nOrders: ${st.orders} | Items: ${st.items} | Sales: RM ${fmt(st.sales)}`);
-}
-
-const DELETE_PWD = "Lyx115599$";
-function deleteWithPwd(){
-  const p=prompt(t('password')+" / Password");
-  if(p!==DELETE_PWD){ alert(t('delFail')); return; }
-  localStorage.removeItem(todayKey());
-  alert(t('delSuccess'));
-  showKpis();
-}
-
-/* ============ 启动 ============ */
-document.addEventListener('DOMContentLoaded',()=>{
-  applyLang(currentLang); // 内部会 renderAll()
-  showKpis();
-});
+/* ===== 启动 ===== */
+document.addEventListener("DOMContentLoaded",()=>{applyLang(currentLang);});
 </script>
 </body>
 </html>
