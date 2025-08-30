@@ -8,8 +8,7 @@
 <style>
 :root{
   --bg:#f7f8fb;--card:#fff;--ink:#0f172a;--mut:#6b7280;--line:#e5e7eb;
-  --brand:#0ea5e9;--ok:#059669;--accent:#f59e0b;
-  --shadow:0 8px 24px rgba(2,8,23,.06)
+  --brand:#0ea5e9;--ok:#059669;--accent:#f59e0b; --shadow:0 8px 24px rgba(2,8,23,.06)
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
@@ -63,10 +62,10 @@ summary::marker,summary::-webkit-details-marker{display:none}
 .kpi b{display:block;font-size:18px}
 
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.tag{font-size:11px;border:1px solid var(--line);color:var(--mut);padding:2px 6px;border-radius:999px}
+.tag{font-size:11px;border:1px solid var(--line);color:#6b7280;padding:2px 6px;border-radius:999px}
 .hidden{display:none}
 
-/* === 修复按钮字体在 WebView 白底消失 === */
+/* 修复：WebView 有时把按钮文字反转成白色导致“看不见” */
 .btn{background:#fff !important;color:#0f172a !important;-webkit-text-fill-color:#0f172a !important;font-weight:700}
 .tools .btn{min-width:140px;text-align:center}
 body{color-scheme: light;}
@@ -74,144 +73,329 @@ body{color-scheme: light;}
 </head>
 <body>
 <header>
-  <h1><span data-i18n="appName">龍運轩ᝰ美食中心</span> <small data-i18n="appNameEn">LYX Food Center</small></h1>
+  <h1><span>龍運轩ᝰ美食中心</span> <small>LYX Food Center</small></h1>
   <div class="lang">
-    <button id="btn-zh" class="active" onclick="applyLang('zh')" data-i18n="lang_zh">中文</button>
-    <button id="btn-en" onclick="applyLang('en')" data-i18n="lang_en">English</button>
-    <button id="btn-vi" onclick="applyLang('vi')" data-i18n="lang_vi">Tiếng Việt</button>
+    <button id="btn-zh" class="active">中文</button>
+    <button id="btn-en">English</button>
+    <button id="btn-vi">Tiếng Việt</button>
   </div>
 </header>
 
 <div class="wrap grid">
-  <!-- 左边菜单 -->
+  <!-- 左：菜单 -->
   <section class="panel">
-    <h3 data-i18n="orderTitle">点餐 / Order</h3>
+    <h3>点餐 / Order</h3>
     <div class="section">
       <div class="controls">
-        <label class="label" data-i18n="tableNo">桌号</label>
+        <label class="label">桌号</label>
         <input id="tableNo" class="input" placeholder="A1">
         <label class="switch">
           <input type="checkbox" id="takeaway">
-          <span data-i18n="takeaway">外带</span>
+          <span>外带</span>
         </label>
       </div>
 
-      <!-- 云吞面 -->
+      <!-- 龍兴记ᝰ云吞面（默认收起） -->
       <details>
         <summary>
-          <span data-i18n="cat_wonton">龍兴记ᝰ云吞面</span>
-          <span class="cat-sub" data-i18n="subTap">点击展开/收起</span>
+          <span>龍兴记ᝰ云吞面</span>
+          <span class="cat-sub">点击展开/收起</span>
         </summary>
         <div class="cards" id="cat-wonton"></div>
       </details>
 
-      <!-- 饮料 -->
+      <!-- 饮料（默认收起） -->
       <details>
         <summary>
-          <span data-i18n="cat_drinks">饮料</span>
-          <span class="cat-sub" data-i18n="ruleCaption">规则见小字</span>
+          <span>饮料</span>
+          <span class="cat-sub">全部饮料冰+RM0.20（罐装水除外；我们已把热/冰分开定价）</span>
         </summary>
         <div class="cards" id="cat-drinks"></div>
       </details>
 
-      <!-- 婶婶档 -->
+      <!-- 婶婶档（默认收起） -->
       <details>
         <summary>
-          <span data-i18n="cat_auntie">婶婶档</span>
-          <span class="cat-sub" data-i18n="subTap">点击展开/收起</span>
+          <span>婶婶档</span>
+          <span class="cat-sub">点击展开/收起</span>
         </summary>
         <div class="cards" id="cat-auntie"></div>
       </details>
 
-      <!-- 广西卷筒粉 -->
+      <!-- 广西卷筒粉（默认收起） -->
       <details>
         <summary>
-          <span data-i18n="cat_guangxi">广西卷筒粉</span>
-          <span class="cat-sub" data-i18n="subTap">点击展开/收起</span>
+          <span>广西卷筒粉</span>
+          <span class="cat-sub">点击展开/收起</span>
         </summary>
         <div class="cards" id="cat-guangxi"></div>
       </details>
     </div>
   </section>
 
-  <!-- 右边订单 -->
+  <!-- 右：订单 -->
   <aside class="panel sticky">
-    <h3 data-i18n="cartTitle">订单 / Cart</h3>
+    <h3>订单 / Cart</h3>
     <div id="cart" class="section"></div>
     <div class="section">
-      <label class="label" data-i18n="notes">备注</label>
-      <textarea id="note" class="note"></textarea>
+      <label class="label">备注</label>
+      <textarea id="note" class="note" placeholder="例如：少甜 / 少冰 / 加辣"></textarea>
       <div class="sumrow">
-        <button class="btn print" onclick="printReceipt()" data-i18n="print">打印小票</button>
-        <button class="btn done" onclick="finishAndSend()" data-i18n="complete_stats_group">完成并统计（群聊）</button>
+        <button class="btn print" onclick="printReceipt()">打印小票</button>
+        <button class="btn done" onclick="finishAndSend()">完成并统计（群聊）</button>
       </div>
 
       <div class="kpis">
-        <div class="kpi"><span data-i18n="ordersCount">订单笔数</span><b id="kpi-orders">0</b></div>
-        <div class="kpi"><span data-i18n="itemsSold">售出件数</span><b id="kpi-items">0</b></div>
-        <div class="kpi"><span data-i18n="salesAmount">销售金额</span><b id="kpi-sales">RM 0.00</b></div>
+        <div class="kpi"><span>订单笔数</span><b id="kpi-orders">0</b></div>
+        <div class="kpi"><span>售出件数</span><b id="kpi-items">0</b></div>
+        <div class="kpi"><span>销售金额</span><b id="kpi-sales">RM 0.00</b></div>
       </div>
 
       <div class="tools">
         <button class="btn" onclick="viewToday()">查看明细</button>
         <button class="btn" onclick="viewByCategory()">分类统计</button>
-        <button class="btn" onclick="exportCSV('today')">导出今日 CSV</button>
+        <button class="btn" onclick="exportCSV()">导出今日 CSV</button>
         <button class="btn" onclick="deleteWithPwd()">删单（需密码）</button>
       </div>
     </div>
   </aside>
 </div>
 
+<!-- 打印区 -->
+<div id="print-area" class="hidden"></div>
+
 <script>
-/* 菜单数据 */
+/* ========= 菜单数据（严格按你给的） ========= */
+/* 1) 龍兴记ᝰ云吞面 */
 const WONTON = [
-  {id:"w_small", name_zh:"云吞面（小）", price:6.50},
-  {id:"w_mid",   name_zh:"云吞面（中）", price:7.50},
-  {id:"w_big",   name_zh:"云吞面（大）", price:8.50},
-];
-const DRINKS = [
-  {id:"coffee_hot", name_zh:"咖啡（热）", price:2.30},
-  {id:"coffee_ice", name_zh:"咖啡（冰）", price:2.50},
-];
-const AUNTIE = [
-  {id:"a_panmee", name_zh:"面粉糕", price:6.00},
-];
-const GUANGXI = [
-  {id:"gx_su", name_zh:"素粉(Kosong)", price:1.00},
-  {id:"gx_veg", name_zh:"蔬菜卷筒粉", price:2.00},
-  {id:"gx_meatveg", name_zh:"菜加肉卷筒粉", price:3.00},
-  {id:"gx_meat", name_zh:"肉卷筒粉", price:3.00},
-  {id:"gx_full", name_zh:"全家福卷筒粉", price:4.00},
-  {id:"gx_roll", name_zh:"春卷", price:1.00},
-  {id:"gx_yutou", name_zh:"芋头米糕", price:1.00},
+  {id:"w_small", name:"云吞面（小）", price:6.50},
+  {id:"w_mid",   name:"云吞面（中）", price:7.50},
+  {id:"w_big",   name:"云吞面（大）", price:8.50},
+  {id:"w_wantan_dry",  name:"云吞 干捞（一份）", price:5.00},
+  {id:"w_wantan_soup", name:"云吞 汤（一份）",   price:5.00},
+  {id:"w_add3",        name:"加料：云吞 ×3",     price:1.00},
 ];
 
-/* 渲染 */
-const cart={};
+/* 2) 饮料（规则：冰+RM0.20；罐装水固定 RM3.00 —— 我们直接把热/冰作为独立项定价） */
+const DRINKS = [
+  {id:"d_coffee_hot",   name:"咖啡（热）",   price:2.30},
+  {id:"d_coffee_ice",   name:"咖啡（冰）",   price:2.50},
+  {id:"d_coffeeC_hot",  name:"咖啡C（热）",  price:2.50},
+  {id:"d_coffeeC_ice",  name:"咖啡C（冰）",  price:2.70},
+  {id:"d_coffeeO_hot",  name:"咖啡O（热）",  price:2.00},
+  {id:"d_coffeeO_ice",  name:"咖啡O（冰）",  price:2.20},
+  {id:"d_milktea_hot",  name:"奶茶（热）",   price:2.30},
+  {id:"d_milktea_ice",  name:"奶茶（冰）",   price:2.50},
+  {id:"d_milkteaC_hot", name:"奶茶C（热）",  price:2.50},
+  {id:"d_milkteaC_ice", name:"奶茶C（冰）",  price:2.70},
+  {id:"d_milkteaSC_hot",name:"奶茶咸C（热）",price:2.50},
+  {id:"d_milkteaSC_ice",name:"奶茶咸C（冰）",price:2.70},
+  {id:"d_milo_hot",     name:"Milo（热）",   price:2.60},
+  {id:"d_milo_ice",     name:"Milo（冰）",   price:2.80},
+  {id:"d_miloC_hot",    name:"Milo C（热）", price:2.80},
+  {id:"d_miloC_ice",    name:"Milo C（冰）", price:3.00},
+  {id:"d_miloO_hot",    name:"Milo O（热）", price:2.60},
+  {id:"d_miloO_ice",    name:"Milo O（冰）", price:2.80},
+  {id:"d_canned",       name:"罐装水",       price:3.00}, // 固定价
+];
+
+/* 3) 婶婶档（你之前列的 10 个） */
+const AUNTIE = [
+  {id:"a_bitter_rice_noodle", name:"苦瓜米粉",           price:6.00},
+  {id:"a_nasi_ayam",          name:"Nasi Lemak（有鸡肉）", price:6.00},
+  {id:"a_nasi_egg",           name:"Nasi Lemak（只有鸡蛋）", price:3.00},
+  {id:"a_pan_mee",            name:"面粉糕",             price:6.00},
+  {id:"a_braised_rice",       name:"红烧饭",             price:6.00},
+  {id:"a_congee_pork",        name:"鱼粥（猪肉）",        price:6.00},
+  {id:"a_congee_chicken",     name:"鱼粥（鸡肉）",        price:6.00},
+  {id:"a_mianxian",           name:"面线",               price:6.00},
+  {id:"a_lu_rou_fan",         name:"卤肉饭",             price:6.00},
+  {id:"a_kuey_teow_soup",     name:"果条汤",             price:6.00},
+];
+
+/* 4) 广西卷筒粉（新分页） */
+const GUANGXI = [
+  {id:"gx_su",      name:"素粉(kosong)",   price:1.00},
+  {id:"gx_veg",     name:"蔬菜卷筒粉",     price:2.00},
+  {id:"gx_meatveg", name:"菜加肉卷筒粉",   price:3.00},
+  {id:"gx_meat",    name:"肉卷筒粉",       price:3.00},
+  {id:"gx_full",    name:"全家福卷筒粉",   price:4.00},
+  {id:"gx_spring",  name:"春卷",           price:1.00},
+  {id:"gx_taro",    name:"芋头米糕",       price:1.00},
+];
+
+const ALL = [...WONTON, ...DRINKS, ...AUNTIE, ...GUANGXI];
+
+/* ========= 渲染 ========= */
+const cart = {}; // {id: qty}
+
 function itemCard(it){
-  return `<div class="item"><div class="left"><div class="title">${it.name_zh}</div><div>RM ${it.price.toFixed(2)}</div></div>
-  <div><button class="btn small" onclick="dec('${it.id}')">-</button><div id="qty-${it.id}" class="qty">${cart[it.id]||0}</div><button class="btn small" onclick="inc('${it.id}')">+</button></div></div>`;
+  return `
+  <div class="item">
+    <div class="left">
+      <div class="title">${it.name}</div>
+      <div class="sub">RM ${it.price.toFixed(2)}</div>
+    </div>
+    <div>
+      <button class="btn small" onclick="dec('${it.id}')">-</button>
+      <div id="qty-${it.id}" class="qty">${cart[it.id]||0}</div>
+      <button class="btn small" onclick="inc('${it.id}')">+</button>
+      <div style="height:6px"></div>
+      <button class="btn add" onclick="inc('${it.id}')">加入</button>
+    </div>
+  </div>`;
 }
 function renderCategory(elId,list){
-  document.getElementById(elId).innerHTML=list.map(itemCard).join("");
+  document.getElementById(elId).innerHTML = list.map(itemCard).join("");
 }
-function renderAll(){ renderCategory("cat-wonton",WONTON);renderCategory("cat-drinks",DRINKS);renderCategory("cat-auntie",AUNTIE);renderCategory("cat-guangxi",GUANGXI);renderCart(); }
+function renderAll(){
+  renderCategory("cat-wonton", WONTON);
+  renderCategory("cat-drinks", DRINKS);
+  renderCategory("cat-auntie", AUNTIE);
+  renderCategory("cat-guangxi", GUANGXI);
+  renderCart();
+}
 
-/* 加减 */
-function inc(id){ cart[id]=(cart[id]||0)+1;renderCart();syncQty(id);}
-function dec(id){ if(!cart[id])return;cart[id]--;if(cart[id]<=0)delete cart[id];renderCart();syncQty(id);}
-function syncQty(id){ const q=document.getElementById("qty-"+id);if(q)q.textContent=cart[id]||0;}
+/* ========= 购物车 & 价格 ========= */
+function inc(id){ cart[id]=(cart[id]||0)+1; renderCart(); syncQty(id); }
+function dec(id){ if(!cart[id]) return; cart[id]--; if(cart[id]<=0) delete cart[id]; renderCart(); syncQty(id); }
+function syncQty(id){ const q=document.getElementById("qty-"+id); if(q) q.textContent=cart[id]||0; }
+function priceOf(id){ const it=ALL.find(x=>x.id===id); return it?it.price:0; }
+function nameOf(id){ const it=ALL.find(x=>x.id===id); return it?it.name:id; }
 
-/* 购物车 */
-function renderCart(){ let subtotal=0,html=""; for(const id in cart){ const item=[...WONTON,...DRINKS,...AUNTIE,...GUANGXI].find(x=>x.id===id); if(!item)continue; subtotal+=item.price*cart[id]; html+=`<div>${item.name_zh} × ${cart[id]} = RM ${(item.price*cart[id]).toFixed(2)}</div>`;} document.getElementById("cart").innerHTML=html+`<div class="sum">合计 Total: RM ${subtotal.toFixed(2)}</div>`; }
+function renderCart(){
+  const el=document.getElementById("cart");
+  let subtotal=0, html="";
+  Object.keys(cart).forEach(id=>{
+    const qty=cart[id]; const line=priceOf(id)*qty; subtotal+=line;
+    html+=`<div>${nameOf(id)} × ${qty} = RM ${line.toFixed(2)}</div>`;
+  });
+  el.innerHTML = html + `<div class="sum">合计 Total: RM ${subtotal.toFixed(2)}</div>`;
+}
 
-/* 分类统计 */
-function viewByCategory(){ const groups={"云吞面":WONTON,"饮料":DRINKS,"婶婶档":AUNTIE,"广西卷筒粉":GUANGXI}; let msg="分类统计：\n"; for(const [cat,list] of Object.entries(groups)){ let c=0,s=0; list.forEach(it=>{ if(cart[it.id]){c+=cart[it.id];s+=cart[it.id]*it.price;}}); msg+=`${cat}: ${c}件 RM ${s.toFixed(2)}\n`; } alert(msg); }
+/* ========= 本地统计（按天持久化） ========= */
+function todayKey(){ return "lyx_stats_"+(new Date()).toISOString().slice(0,10); }
+function loadStats(){
+  const raw = localStorage.getItem(todayKey());
+  return raw ? JSON.parse(raw) : {orders:0, items:0, sales:0, list:[], cats:{}};
+}
+function saveStats(st){ localStorage.setItem(todayKey(), JSON.stringify(st)); showKpis(); }
+function showKpis(){
+  const s=loadStats();
+  document.getElementById('kpi-orders').textContent=s.orders;
+  document.getElementById('kpi-items').textContent=s.items;
+  document.getElementById('kpi-sales').textContent="RM "+(s.sales||0).toFixed(2);
+}
 
-/* 其他功能（略简化） */
+/* ========= 完成并统计 → WhatsApp 选群 ========= */
+function finishAndSend(){
+  if(Object.keys(cart).length===0){ alert("请先选择项目"); return; }
+
+  const table = document.getElementById('tableNo').value || "-";
+  const type  = document.getElementById('takeaway').checked ? "外带" : "堂食";
+  const note  = (document.getElementById('note').value||"").trim();
+
+  // 计算本单
+  let subtotal=0, items=0, lines=[];
+  Object.keys(cart).forEach(id=>{
+    const qty=cart[id]; items+=qty;
+    const line = priceOf(id)*qty; subtotal+=line;
+    lines.push(`- ${nameOf(id)} × ${qty} = RM ${line.toFixed(2)}`);
+  });
+
+  // 写入统计（总体+分类）
+  const st=loadStats();
+  st.orders += 1; st.items += items; st.sales += subtotal;
+  const catMap={
+    "云吞面":WONTON.map(x=>x.id),
+    "饮料":DRINKS.map(x=>x.id),
+    "婶婶档":AUNTIE.map(x=>x.id),
+    "广西卷筒粉":GUANGXI.map(x=>x.id),
+  };
+  st.cats = st.cats || {};
+  Object.entries(catMap).forEach(([cat,ids])=>{
+    let c=0,s=0; ids.forEach(id=>{ if(cart[id]){ c+=cart[id]; s+=cart[id]*priceOf(id);} });
+    if(!st.cats[cat]) st.cats[cat]={count:0,amount:0};
+    st.cats[cat].count += c; st.cats[cat].amount += s;
+  });
+  st.list.push({time:new Date().toLocaleString(), table, type, lines, total:subtotal, note});
+  saveStats(st);
+
+  // 组合消息并打开 WhatsApp 选择器（可选联系人/群聊）
+  const NL = "%0A";
+  const msg = [
+    "【龍運轩ᝰ美食中心】订单", `桌号: ${table}`, `类型: ${type}`, "",
+    "明细:"
+  ].concat(lines).concat(["",`合计: RM ${subtotal.toFixed(2)}`, note?("备注: "+encodeURIComponent(note)):""]).join(NL);
+  location.href = `https://wa.me/?text=${msg}`;
+  // 备用：App Scheme（若上行在你的 WebView 不工作，可用下面这行）
+  // location.href = `whatsapp://send?text=${decodeURIComponent(msg)}`;
+
+  // 清空购物车（不清统计）
+  for(const k in cart) delete cart[k];
+  renderCart(); showKpis();
+}
+
+/* ========= 打印小票 ========= */
+function printReceipt(){
+  if(Object.keys(cart).length===0){ alert("没有项目"); return; }
+  const area=document.getElementById('print-area'); area.classList.remove('hidden');
+  const table=document.getElementById('tableNo').value||'-';
+  const type=document.getElementById('takeaway').checked?'外带':'堂食';
+  let subtotal=0, body='';
+  Object.keys(cart).forEach(id=>{
+    const qty=cart[id], line=priceOf(id)*qty; subtotal+=line;
+    body+=`<div>${nameOf(id)} × ${qty}<span style="float:right">RM ${line.toFixed(2)}</span></div>`;
+  });
+  area.innerHTML=`
+  <div style="max-width:340px;margin:0 auto;font-size:13px;line-height:1.35">
+    <div style="text-align:center;font-weight:900">龍運轩ᝰ美食中心<br><small>LYX Food Center</small></div>
+    <div>时间: ${new Date().toLocaleString()}</div>
+    <div>桌号: ${table}</div>
+    <div>类型: ${type}</div>
+    <hr>${body}<hr>
+    <div style="font-weight:900">合计: RM ${subtotal.toFixed(2)}</div>
+  </div>`;
+  window.print(); area.classList.add('hidden');
+}
+
+/* ========= 查看 / 导出 / 删除 ========= */
+function viewToday(){
+  const st=loadStats();
+  const lines=(st.list||[]).map((r,i)=>`${i+1}. [${r.time}] ${r.table}/${r.type}\n   ${r.lines.join("\n   ")}\n   Total: RM ${r.total.toFixed(2)}${r.note?("\n   Note: "+r.note):""}`).join("\n\n");
+  alert((lines||"（今天暂无）") + `\n\nOrders: ${st.orders} | Items: ${st.items} | Sales: RM ${st.sales.toFixed(2)}`);
+}
+function viewByCategory(){
+  const st=loadStats(); const c=st.cats||{};
+  const msg = [
+    "分类统计（累计到今天）",
+    `云吞面：${(c["云吞面"]?.count||0)} 件 / RM ${(c["云吞面"]?.amount||0).toFixed(2)}`,
+    `饮料：${(c["饮料"]?.count||0)} 件 / RM ${(c["饮料"]?.amount||0).toFixed(2)}`,
+    `婶婶档：${(c["婶婶档"]?.count||0)} 件 / RM ${(c["婶婶档"]?.amount||0).toFixed(2)}`,
+    `广西卷筒粉：${(c["广西卷筒粉"]?.count||0)} 件 / RM ${(c["广西卷筒粉"]?.amount||0).toFixed(2)}`
+  ].join("\n");
+  alert(msg);
+}
+function exportCSV(){
+  const k=todayKey(), st=JSON.parse(localStorage.getItem(k)||"{}");
+  const rows=[["time","table","type","items","total","note"].join(",")];
+  (st.list||[]).forEach(r=>{
+    rows.push([r.time,r.table,r.type,(r.lines||[]).join(" | "),"RM "+r.total.toFixed(2),(r.note||"").replace(/,/g," ")].join(","));
+  });
+  const blob=new Blob([rows.join("\n")],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`lyx_today_${new Date().toISOString().slice(0,10)}.csv`; a.click();
+}
 const DELETE_PWD="Lyx115599$";
-function deleteWithPwd(){ const p=prompt("密码"); if(p!==DELETE_PWD){alert("错误");return;}localStorage.clear();alert("已清空");}
-document.addEventListener("DOMContentLoaded",renderAll);
+function deleteWithPwd(){
+  const p=prompt("输入密码以清空今天统计");
+  if(p!==DELETE_PWD){ alert("密码错误"); return; }
+  localStorage.removeItem(todayKey());
+  showKpis(); alert("已清空今天统计");
+}
+
+/* ========= 启动 ========= */
+document.addEventListener("DOMContentLoaded", ()=>{ renderAll(); showKpis(); });
 </script>
 </body>
 </html>
