@@ -1,0 +1,120 @@
+<script>
+/* ========== I18N 多语言 ========== */
+let LANG = 'zh';
+const I18N = {
+  ui: {
+    zh:{title_main:"龍運轩ᝰ美食中心",title_sub:"LYX Food Center",order:"点餐 / Order",cart:"订单 / Cart",
+      table:"桌号",takeaway:"外带",dinein:"堂食",add:"加入",
+      cat_wonton:"龍兴记ᝰ云吞面",cat_wonton_tip:"点击展开/收起",
+      cat_drinks:"饮料",cat_drinks_tip:"全部饮料冰+RM0.20（罐装水除外；我们已把热/冰分开定价）",
+      cat_auntie:"婶婶档",cat_auntie_tip:"点击展开/收起",
+      cat_gx:"广西卷筒粉",cat_gx_tip:"点击展开/收起",
+      note_label:"备注",note_ph:"例如：少甜 / 少冰 / 加辣",
+      print:"打印小票",done:"完成并统计（群聊）",
+      k_orders:"订单笔数",k_items:"售出件数",k_sales:"销售金额",
+      tool_today:"查看明细",tool_cat:"分类统计",tool_csv:"导出今日 CSV",tool_del:"删单（需密码）",
+      sum_total:"合计 Total",alert_pick:"请先选择项目",alert_empty:"没有项目",
+      today_none:"（今天暂无）",cat_report_title:"分类统计（累计到今天）",
+      cat_name_w:"云吞面",cat_name_d:"饮料",cat_name_a:"婶婶档",cat_name_gx:"广西卷筒粉",
+      time:"时间",type:"类型",csv_time:"时间",csv_table:"桌号",csv_type:"类型",csv_items:"项目",csv_total:"合计",csv_note:"备注"},
+    en:{title_main:"LYX Food Center (龍運轩ᝰ)",title_sub:"LYX Food Center",order:"Order",cart:"Cart",
+      table:"Table",takeaway:"Takeaway",dinein:"Dine-in",add:"Add",
+      cat_wonton:"Wonton Noodles",cat_wonton_tip:"Tap to expand/collapse",
+      cat_drinks:"Drinks",cat_drinks_tip:"Iced + RM0.20 (except canned water; hot/iced priced separately)",
+      cat_auntie:"Auntie's Stall",cat_auntie_tip:"Tap to expand/collapse",
+      cat_gx:"Guangxi Rolls",cat_gx_tip:"Tap to expand/collapse",
+      note_label:"Note",note_ph:"e.g. less sweet / less ice / extra spicy",
+      print:"Print Receipt",done:"Finish & Send (Group)",
+      k_orders:"Orders",k_items:"Items",k_sales:"Sales",
+      tool_today:"View Today",tool_cat:"By Category",tool_csv:"Export Today CSV",tool_del:"Delete (password)",
+      sum_total:"Total",alert_pick:"Please add items first",alert_empty:"No items",
+      today_none:"(No orders today)",cat_report_title:"Category Summary (today)",
+      cat_name_w:"Wonton Noodles",cat_name_d:"Drinks",cat_name_a:"Auntie's Stall",cat_name_gx:"Guangxi Rolls",
+      time:"Time",type:"Type",csv_time:"Time",csv_table:"Table",csv_type:"Type",csv_items:"Items",csv_total:"Total",csv_note:"Note"},
+    vi:{title_main:"Trung tâm Ẩm thực LYX (龍運轩ᝰ)",title_sub:"LYX Food Center",order:"Gọi món",cart:"Giỏ hàng",
+      table:"Bàn",takeaway:"Mang đi",dinein:"Dùng tại chỗ",add:"Thêm",
+      cat_wonton:"Mì hoành thánh",cat_wonton_tip:"Nhấn để mở/đóng",
+      cat_drinks:"Đồ uống",cat_drinks_tip:"Đá + RM0.20 (trừ nước lon; giá nóng/lạnh tách riêng)",
+      cat_auntie:"Quầy của Cô",cat_auntie_tip:"Nhấn để mở/đóng",
+      cat_gx:"Bánh cuốn Quảng Tây",cat_gx_tip:"Nhấn để mở/đóng",
+      note_label:"Ghi chú",note_ph:"vd: ít ngọt / ít đá / thêm cay",
+      print:"In hóa đơn",done:"Hoàn tất & gửi (nhóm)",
+      k_orders:"Đơn",k_items:"Món",k_sales:"Doanh thu",
+      tool_today:"Xem hôm nay",tool_cat:"Theo danh mục",tool_csv:"Xuất CSV hôm nay",tool_del:"Xóa (mật khẩu)",
+      sum_total:"Tổng",alert_pick:"Hãy chọn món trước",alert_empty:"Chưa có món",
+      today_none:"(Chưa có đơn hôm nay)",cat_report_title:"Tổng hợp theo danh mục (hôm nay)",
+      cat_name_w:"Mì hoành thánh",cat_name_d:"Đồ uống",cat_name_a:"Quầy của Cô",cat_name_gx:"Bánh cuốn Quảng Tây",
+      time:"Thời gian",type:"Loại",csv_time:"Thời gian",csv_table:"Bàn",csv_type:"Loại",csv_items:"Món",csv_total:"Tổng",csv_note:"Ghi chú"}
+  }
+};
+function t(k){return I18N.ui[LANG][k];}
+
+/* ========== 菜单数据 ========= */
+const WONTON=[{id:"w_small",name:"云吞面（小）",price:6.50},{id:"w_mid",name:"云吞面（中）",price:7.50},{id:"w_big",name:"云吞面（大）",price:8.50}];
+const DRINKS=[{id:"d_coffee_hot",name:"咖啡（热）",price:2.30},{id:"d_coffee_ice",name:"咖啡（冰）",price:2.50}];
+const AUNTIE=[{id:"a_pan_mee",name:"面粉糕",price:6.00},{id:"a_lu_rou_fan",name:"卤肉饭",price:6.00}];
+const GUANGXI=[{id:"gx_su",name:"素粉(kosong)",price:1.00},{id:"gx_full",name:"全家福卷筒粉",price:4.00}];
+const ALL=[...WONTON,...DRINKS,...AUNTIE,...GUANGXI];
+
+/* ========== 渲染 ========= */
+const cart={};
+function itemCard(it){
+  return `<div class="item"><div class="left"><div class="title">${it.name}</div><div class="sub">RM ${it.price.toFixed(2)}</div></div>
+    <div><button class="btn small" onclick="dec('${it.id}')">-</button>
+    <div id="qty-${it.id}" class="qty">${cart[it.id]||0}</div>
+    <button class="btn small" onclick="inc('${it.id}')">+</button>
+    <div style="height:6px"></div>
+    <button class="btn add" onclick="inc('${it.id}')">${t('add')}</button></div></div>`;
+}
+function renderCategory(elId,list){document.getElementById(elId).innerHTML=list.map(itemCard).join("");}
+function renderAll(){
+  renderCategory("cat-wonton",WONTON);
+  renderCategory("cat-drinks",DRINKS);
+  renderCategory("cat-auntie",AUNTIE);
+  renderCategory("cat-guangxi",GUANGXI);
+  renderCart();showKpis();
+}
+
+/* ========== 购物车 & 价格 ========= */
+function inc(id){cart[id]=(cart[id]||0)+1;renderCart();syncQty(id);}
+function dec(id){if(!cart[id])return;cart[id]--;if(cart[id]<=0)delete cart[id];renderCart();syncQty(id);}
+function syncQty(id){const q=document.getElementById("qty-"+id);if(q)q.textContent=cart[id]||0;}
+function priceOf(id){const it=ALL.find(x=>x.id===id);return it?it.price:0;}
+function nameOf(id){const it=ALL.find(x=>x.id===id);return it?it.name:id;}
+function renderCart(){const el=document.getElementById("cart");let subtotal=0,html="";Object.keys(cart).forEach(id=>{const qty=cart[id];const line=priceOf(id)*qty;subtotal+=line;html+=`<div>${nameOf(id)} × ${qty} = RM ${line.toFixed(2)}</div>`;});el.innerHTML=html+`<div class="sum">${t('sum_total')}: RM ${subtotal.toFixed(2)}</div>`;}
+
+/* ========== 统计 ========= */
+function todayKey(){return "lyx_stats_"+(new Date()).toISOString().slice(0,10);}
+function loadStats(){const raw=localStorage.getItem(todayKey());return raw?JSON.parse(raw):{orders:0,items:0,sales:0,list:[]};}
+function saveStats(st){localStorage.setItem(todayKey(),JSON.stringify(st));showKpis();}
+function showKpis(){const s=loadStats();document.getElementById('kpi-orders').textContent=s.orders;document.getElementById('kpi-items').textContent=s.items;document.getElementById('kpi-sales').textContent="RM "+(s.sales||0).toFixed(2);}
+
+/* ========== 完成并统计 ========= */
+function finishAndSend(){
+  if(Object.keys(cart).length===0){alert(t('alert_pick'));return;}
+  let subtotal=0,items=0;Object.keys(cart).forEach(id=>{const qty=cart[id];items+=qty;subtotal+=priceOf(id)*qty;});
+  const st=loadStats();st.orders+=1;st.items+=items;st.sales+=subtotal;st.list.push({time:new Date().toLocaleString(),cart:JSON.parse(JSON.stringify(cart)),total:subtotal});saveStats(st);
+  alert(`${t('sum_total')}: RM ${subtotal.toFixed(2)} 已保存`);
+  for(const k in cart)delete cart[k];renderCart();showKpis();
+}
+
+/* ========== 打印 ========= */
+function printReceipt(){
+  if(Object.keys(cart).length===0){alert(t('alert_empty'));return;}
+  let subtotal=0,body='';Object.keys(cart).forEach(id=>{const qty=cart[id],line=priceOf(id)*qty;subtotal+=line;body+=`${nameOf(id)} × ${qty} = RM ${line.toFixed(2)}\n`;});
+  alert(`打印小票:\n${body}\n${t('sum_total')}: RM ${subtotal.toFixed(2)}`);
+}
+
+/* ========== 查看/导出 ========= */
+function viewToday(){const st=loadStats();alert(JSON.stringify(st,null,2));}
+function viewByCategory(){alert("分类统计待补充");}
+function exportCSV(){alert("CSV 导出待补充");}
+
+/* ========== 删单 ========= */
+const DELETE_PWD="Lyx115599$";
+function deleteWithPwd(){const p=prompt("输入密码以清空今天统计");if(p!==DELETE_PWD){alert("密码错误");return;}localStorage.removeItem(todayKey());showKpis();alert("已清空今天统计");}
+
+/* ========== 语言切换 ========= */
+function setLang(next){LANG=next;document.getElementById('btn-zh').classList.toggle('active',next==='zh');document.getElementById('btn-en').classList.toggle('active',next==='en');document.getElementById('btn-vi').classList.toggle('active',next==='vi');renderAll();}
+document.addEventListener("DOMContentLoaded",()=>{document.getElementById('btn-zh').addEventListener('click',()=>setLang('zh'));document.getElementById('btn-en').addEventListener('click',()=>setLang('en'));document.getElementById('btn-vi').addEventListener('click',()=>setLang('vi'));renderAll();});
+</script>
