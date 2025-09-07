@@ -1,601 +1,151 @@
 <!DOCTYPE html>
-<html lang="zh" translate="no">
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>龍運轩ᝰ美食中心 · LYX Food Center</title>
-<meta name="color-scheme" content="light dark">
-<style>
-:root{
-  --bg:#f7f8fb;--card:#fff;--ink:#0f172a;--mut:#6b7280;--line:#e5e7eb;
-  --brand:#0ea5e9;--ok:#059669;--accent:#f59e0b; --shadow:0 8px 24px rgba(2,8,23,.06)
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-a{text-decoration:none;color:inherit}
-.wrap{max-width:1200px;margin:20px auto;padding:0 12px 24px}
-header{position:sticky;top:0;z-index:9;background:linear-gradient(180deg,#0ea5e9,#0284c7);color:#fff;padding:14px 16px}
-h1{margin:0;font-size:20px;letter-spacing:.5px;display:flex;gap:10px;align-items:baseline}
-h1 small{opacity:.9}
-.lang{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.lang button{padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-weight:700}
-.lang button.active{background:#fff;color:#0b3a55}
-
-.grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
-@media (max-width:980px){.grid{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-.panel h3{margin:0;padding:14px 16px;border-bottom:1px solid var(--line);font-size:16px;display:flex;align-items:center;gap:8px}
-.section{padding:12px 12px 18px}
-
-.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 6px 10px}
-.label{font-weight:700}
-.input{padding:10px;border:1px solid var(--line);border-radius:12px;min-width:140px}
-.switch{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff}
-
-details{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:#fff}
-summary{list-style:none;cursor:pointer;padding:12px 14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;background:#fff7ed;border-left:4px solid var(--accent)}
-summary::marker,summary::-webkit-details-marker{display:none}
-.cat-sub{color:#a16207;font-weight:600;font-size:12px}
-
-.cards{padding:10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-@media (max-width:720px){.cards{grid-template-columns:1fr}}
-
-.item{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;display:flex;gap:12px;align-items:center}
-.item .left{flex:1}
-.title{font-weight:900}
-.sub{color:var(--mut);font-size:12px;line-height:1.25}
-.qty{min-width:56px;text-align:center;font-weight:900}
-
-.btn{padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;font-weight:700}
-.btn.small{padding:10px 14px;font-size:18px;border-width:2px}
-.btn.add{background:var(--brand);border-color:var(--brand);color:#fff}
-
-.sticky{position:sticky;top:86px}
-.sumrow{display:flex;gap:10px;margin-top:10px}
-.sumrow .btn.print{flex:1;background:#1d4ed8;border-color:#1d4ed8;color:#fff}
-.sumrow .btn.done{flex:3;background:var(--ok);border-color:var(--ok);color:#fff}
-.note{width:100%;min-height:68px;border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:10px}
-.sum{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
-
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.kpi{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;text-align:center}
-.kpi b{display:block;font-size:18px}
-
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.tag{font-size:11px;border:1px solid var(--line);color:#6b7280;padding:2px 6px;border-radius:999px}
-.hidden{display:none}
-
-/* 修复 WebView 文本反色 */
-.btn{background:#fff !important;color:#0f172a !important;-webkit-text-fill-color:#0f172a !important;font-weight:700}
-.tools .btn{min-width:140px;text-align:center}
-body{color-scheme: light;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEY FORTUNE ENTERPRISE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #203a43;
+    }
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .service {
+      flex: 1 1 280px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .service:hover {
+      transform: translateY(-5px);
+    }
+    .contact {
+      background: #f1f1f1;
+      padding: 40px 20px;
+      border-radius: 8px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    form button {
+      background: #203a43;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #2c5364;
+    }
+    footer {
+      text-align: center;
+      background: #203a43;
+      color: #fff;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1><span id="title-main">龍運轩ᝰ美食中心</span> <small id="title-sub">LYX Food Center</small></h1>
-  <div class="lang">
-    <button id="btn-zh" class="active">中文</button>
-    <button id="btn-en">English</button>
-    <button id="btn-vi">Tiếng Việt</button>
-  </div>
-</header>
 
-<div class="wrap grid">
-  <!-- 左：菜单 -->
-  <section class="panel">
-    <h3 id="panel-order">点餐 / Order</h3>
-    <div class="section">
-      <div class="controls">
-        <label class="label" id="label-table">桌号</label>
-        <input id="tableNo" class="input" placeholder="A1">
-        <label class="switch">
-          <input type="checkbox" id="takeaway">
-          <span id="takeaway-label">外带</span>
-        </label>
+  <!-- Hero 区 -->
+  <header>
+    <h1>TEY FORTUNE ENTERPRISE</h1>
+    <p>专注 AI 研究 · 软件研发 · 投资经纪服务</p>
+  </header>
+
+  <!-- 关于我们 -->
+  <section>
+    <h2>关于我们</h2>
+    <p>
+      TEY FORTUNE ENTERPRISE 致力于人工智能领域前沿研究，提供高效的软件研发方案，
+      并结合专业的投资经纪服务，帮助客户实现价值增长。
+    </p>
+    <ul>
+      <li>🔹 AI 研究：探索机器学习、自然语言处理等前沿技术</li>
+      <li>🔹 软件研发：定制化开发与系统优化</li>
+      <li>🔹 投资经纪：提供精准投资与资本配置建议</li>
+    </ul>
+  </section>
+
+  <!-- 服务介绍 -->
+  <section>
+    <h2>服务介绍</h2>
+    <div class="services">
+      <div class="service">
+        <h3>AI 研究</h3>
+        <p>应用 AI 技术于企业自动化、数据预测与商业智能，推动创新发展。</p>
       </div>
-
-      <!-- 龍兴记ᝰ云吞面（默认收起） -->
-      <details>
-        <summary>
-          <span id="sum-wonton">龍兴记ᝰ云吞面</span>
-          <span class="cat-sub" id="tip-wonton">点击展开/收起</span>
-        </summary>
-        <div class="cards" id="cat-wonton"></div>
-      </details>
-
-      <!-- 饮料（默认收起） -->
-      <details>
-        <summary>
-          <span id="sum-drinks">饮料</span>
-          <span class="cat-sub" id="tip-drinks">全部饮料冰+RM0.20（罐装水除外；我们已把热/冰分开定价）</span>
-        </summary>
-        <div class="cards" id="cat-drinks"></div>
-      </details>
-
-      <!-- 婶婶档（默认收起） -->
-      <details>
-        <summary>
-          <span id="sum-auntie">婶婶档</span>
-          <span class="cat-sub" id="tip-auntie">点击展开/收起</span>
-        </summary>
-        <div class="cards" id="cat-auntie"></div>
-      </details>
-
-      <!-- 广西卷筒粉（默认收起） -->
-      <details>
-        <summary>
-          <span id="sum-gx">广西卷筒粉</span>
-          <span class="cat-sub" id="tip-gx">点击展开/收起</span>
-        </summary>
-        <div class="cards" id="cat-guangxi"></div>
-      </details>
+      <div class="service">
+        <h3>软件研发</h3>
+        <p>从移动应用到企业系统，提供全流程开发与技术支持。</p>
+      </div>
+      <div class="service">
+        <h3>投资经纪</h3>
+        <p>提供股票、基金、ETF 等金融产品的策略分析与执行服务。</p>
+      </div>
     </div>
   </section>
 
-  <!-- 右：订单 -->
-  <aside class="panel sticky">
-    <h3 id="panel-cart">订单 / Cart</h3>
-    <div id="cart" class="section"></div>
-    <div class="section">
-      <label class="label" id="note-label">备注</label>
-      <textarea id="note" class="note" placeholder="例如：少甜 / 少冰 / 加辣"></textarea>
-      <div class="sumrow">
-        <button class="btn print" id="btn-print">打印小票</button>
-        <button class="btn done" id="btn-done">完成并统计（群聊）</button>
-      </div>
+  <!-- 联系我们 -->
+  <section>
+    <h2>联系我们</h2>
+    <div class="contact">
+      <p><strong>公司地址：</strong>LOT 2891, BWH JLN SULTAN BUKIT SIPUT, 85020 SEGAMAT, JOHOR</p>
+      <p><strong>电话：</strong>（待填写）</p>
+      <p><strong>邮箱：</strong>info@teyfortune.com</p>
 
-      <div class="kpis">
-        <div class="kpi"><span id="kpi-orders-title">订单笔数</span><b id="kpi-orders">0</b></div>
-        <div class="kpi"><span id="kpi-items-title">售出件数</span><b id="kpi-items">0</b></div>
-        <div class="kpi"><span id="kpi-sales-title">销售金额</span><b id="kpi-sales">RM 0.00</b></div>
-      </div>
-
-      <div class="tools">
-        <button class="btn" id="btn-view">查看明细</button>
-        <button class="btn" id="btn-cat">分类统计</button>
-        <button class="btn" id="btn-csv">导出今日 CSV</button>
-        <button class="btn" id="btn-del">删单（需密码）</button>
-      </div>
+      <form action="mailto:info@teyfortune.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="您的姓名" required />
+        <input type="email" name="email" placeholder="您的邮箱" required />
+        <textarea name="message" rows="5" placeholder="请输入留言"></textarea>
+        <button type="submit">发送留言</button>
+      </form>
     </div>
-  </aside>
-</div>
+  </section>
 
-<!-- 打印区 -->
-<div id="print-area" class="hidden"></div>
+  <!-- 页脚 -->
+  <footer>
+    <p>© 2025 TEY FORTUNE ENTERPRISE. 保留所有权利。</p>
+  </footer>
 
-<script>
-/* ====== 全局报错可视化（避免白屏） ====== */
-window.onerror = function(msg, src, line, col){
-  alert("脚本错误：\\n" + msg + "\\n@" + (src||'inline') + ":" + line + ":" + col);
-};
-
-/* ========== I18N 多语言 ========== */
-let LANG = 'zh';
-const I18N = {
-  ui: {
-    zh:{title_main:"龍運轩ᝰ美食中心",title_sub:"LYX Food Center",order:"点餐 / Order",cart:"订单 / Cart",
-      table:"桌号",takeaway:"外带",dinein:"堂食",add:"加入",
-      cat_wonton:"龍兴记ᝰ云吞面",cat_wonton_tip:"点击展开/收起",
-      cat_drinks:"饮料",cat_drinks_tip:"全部饮料冰+RM0.20（罐装水除外；我们已把热/冰分开定价）",
-      cat_auntie:"婶婶档",cat_auntie_tip:"点击展开/收起",
-      cat_gx:"广西卷筒粉",cat_gx_tip:"点击展开/收起",
-      note_label:"备注",note_ph:"例如：少甜 / 少冰 / 加辣",
-      print:"打印小票",done:"完成并统计（群聊）",
-      k_orders:"订单笔数",k_items:"售出件数",k_sales:"销售金额",
-      tool_today:"查看明细",tool_cat:"分类统计",tool_csv:"导出今日 CSV",tool_del:"删单（需密码）",
-      sum_total:"合计 Total",alert_pick:"请先选择项目",alert_empty:"没有项目",
-      today_none:"（今天暂无）",cat_report_title:"分类统计（累计到今天）",
-      cat_name_w:"云吞面",cat_name_d:"饮料",cat_name_a:"婶婶档",cat_name_gx:"广西卷筒粉",
-      time:"时间",type:"类型",
-      csv_time:"时间",csv_table:"桌号",csv_type:"类型",csv_items:"项目",csv_total:"合计",csv_note:"备注"},
-    en:{title_main:"LYX Food Center (龍運轩ᝰ)",title_sub:"LYX Food Center",order:"Order",cart:"Cart",
-      table:"Table",takeaway:"Takeaway",dinein:"Dine-in",add:"Add",
-      cat_wonton:"Wonton Noodles",cat_wonton_tip:"Tap to expand/collapse",
-      cat_drinks:"Drinks",cat_drinks_tip:"Iced + RM0.20 (except canned water; hot/iced priced separately)",
-      cat_auntie:"Auntie's Stall",cat_auntie_tip:"Tap to expand/collapse",
-      cat_gx:"Guangxi Rolls",cat_gx_tip:"Tap to expand/collapse",
-      note_label:"Note",note_ph:"e.g. less sweet / less ice / extra spicy",
-      print:"Print Receipt",done:"Finish & Send (Group)",
-      k_orders:"Orders",k_items:"Items",k_sales:"Sales",
-      tool_today:"View Today",tool_cat:"By Category",tool_csv:"Export Today CSV",tool_del:"Delete (password)",
-      sum_total:"Total",alert_pick:"Please add items first",alert_empty:"No items",
-      today_none:"(No orders today)",cat_report_title:"Category Summary (today)",
-      cat_name_w:"Wonton Noodles",cat_name_d:"Drinks",cat_name_a:"Auntie's Stall",cat_name_gx:"Guangxi Rolls",
-      time:"Time",type:"Type",
-      csv_time:"Time",csv_table:"Table",csv_type:"Type",csv_items:"Items",csv_total:"Total",csv_note:"Note"},
-    vi:{title_main:"Trung tâm Ẩm thực LYX (龍運轩ᝰ)",title_sub:"LYX Food Center",order:"Gọi món",cart:"Giỏ hàng",
-      table:"Bàn",takeaway:"Mang đi",dinein:"Dùng tại chỗ",add:"Thêm",
-      cat_wonton:"Mì hoành thánh",cat_wonton_tip:"Nhấn để mở/đóng",
-      cat_drinks:"Đồ uống",cat_drinks_tip:"Đá + RM0.20 (trừ nước lon; giá nóng/lạnh tách riêng)",
-      cat_auntie:"Quầy của Cô",cat_auntie_tip:"Nhấn để mở/đóng",
-      cat_gx:"Bánh cuốn Quảng Tây",cat_gx_tip:"Nhấn để mở/đóng",
-      note_label:"Ghi chú",note_ph:"vd: ít ngọt / ít đá / thêm cay",
-      print:"In hóa đơn",done:"Hoàn tất & gửi (nhóm)",
-      k_orders:"Đơn",k_items:"Món",k_sales:"Doanh thu",
-      tool_today:"Xem hôm nay",tool_cat:"Theo danh mục",tool_csv:"Xuất CSV hôm nay",tool_del:"Xóa (mật khẩu)",
-      sum_total:"Tổng",alert_pick:"Hãy chọn món trước",alert_empty:"Chưa có món",
-      today_none:"(Chưa có đơn hôm nay)",cat_report_title:"Tổng hợp theo danh mục (hôm nay)",
-      cat_name_w:"Mì hoành thánh",cat_name_d:"Đồ uống",cat_name_a:"Quầy của Cô",cat_name_gx:"Bánh cuốn Quảng Tây",
-      time:"Thời gian",type:"Loại",
-      csv_time:"Thời gian",csv_table:"Bàn",csv_type:"Loại",csv_items:"Món",csv_total:"Tổng",csv_note:"Ghi chú"}
-  },
-  // 菜名翻译（未列出的用中文名）
-  items:{
-    /* 1) WONTON */
-    w_small:{en:"Wonton Noodles (S)",vi:"Mì hoành thánh (Nhỏ)"},
-    w_mid:{en:"Wonton Noodles (M)",vi:"Mì hoành thánh (Vừa)"},
-    w_big:{en:"Wonton Noodles (L)",vi:"Mì hoành thánh (Lớn)"},
-    w_wantan_dry:{en:"Wontons (Dry, per portion)",vi:"Hoành thánh khô (1 phần)"},
-    w_wantan_soup:{en:"Wontons (Soup, per portion)",vi:"Hoành thánh nước (1 phần)"},
-    w_add3:{en:"Add-on: 3 Wontons",vi:"Thêm: 3 hoành thánh"},
-    /* 2) DRINKS */
-    d_coffee_hot:{en:"Coffee (Hot)",vi:"Cà phê (Nóng)"},
-    d_coffee_ice:{en:"Coffee (Iced)",vi:"Cà phê (Đá)"},
-    d_coffeeC_hot:{en:"Coffee C (Hot)",vi:"Cà phê C (Nóng)"},
-    d_coffeeC_ice:{en:"Coffee C (Iced)",vi:"Cà phê C (Đá)"},
-    d_coffeeO_hot:{en:"Coffee O (Hot)",vi:"Cà phê O (Nóng)"},
-    d_coffeeO_ice:{en:"Coffee O (Iced)",vi:"Cà phê O (Đá)"},
-    d_milktea_hot:{en:"Milk Tea (Hot)",vi:"Trà sữa (Nóng)"},
-    d_milktea_ice:{en:"Milk Tea (Iced)",vi:"Trà sữa (Đá)"},
-    d_milkteaC_hot:{en:"Milk Tea C (Hot)",vi:"Trà sữa C (Nóng)"},
-    d_milkteaC_ice:{en:"Milk Tea C (Iced)",vi:"Trà sữa C (Đá)"},
-    d_milkteaSC_hot:{en:"Salty Milk Tea C (Hot)",vi:"Trà sữa mặn C (Nóng)"},
-    d_milkteaSC_ice:{en:"Salty Milk Tea C (Iced)",vi:"Trà sữa mặn C (Đá)"},
-    d_milo_hot:{en:"Milo (Hot)",vi:"Milo (Nóng)"},
-    d_milo_ice:{en:"Milo (Iced)",vi:"Milo (Đá)"},
-    d_miloC_hot:{en:"Milo C (Hot)",vi:"Milo C (Nóng)"},
-    d_miloC_ice:{en:"Milo C (Iced)",vi:"Milo C (Đá)"},
-    d_miloO_hot:{en:"Milo O (Hot)",vi:"Milo O (Nóng)"},
-    d_miloO_ice:{en:"Milo O (Iced)",vi:"Milo O (Đá)"},
-    d_canned:{en:"Canned Water",vi:"Nước lon"},
-    /* 3) Auntie 主食 + 加料 */
-    a_bitter_rice_noodle:{en:"Bitter Gourd Bee Hoon",vi:"Bún khổ qua"},
-    a_nasi_ayam:{en:"Nasi Lemak (Chicken)",vi:"Nasi Lemak (gà)"},
-    a_nasi_egg:{en:"Nasi Lemak (Egg only)",vi:"Nasi Lemak (trứng)"},
-    a_pan_mee:{en:"Pan Mee",vi:"Mì Pan Mee"},
-    a_braised_rice:{en:"Braised Rice",vi:"Cơm kho"},
-    a_congee_pork:{en:"Fish Congee (Pork)",vi:"Cháo cá (heo)"},
-    a_congee_chicken:{en:"Fish Congee (Chicken)",vi:"Cháo cá (gà)"},
-    a_mianxian:{en:"Mee Sua",vi:"Mì sợi Mee Sua"},
-    a_lu_rou_fan:{en:"Lu Rou Fan",vi:"Cơm thịt kho"},
-    a_kuey_teow_soup:{en:"Kuey Teow Soup",vi:"Hủ tiếu nước"},
-    a_add_century_egg:{en:"Add-on: Century Egg",vi:"Thêm: trứng bách thảo"},
-    a_add_pickled_cucumber:{en:"Pickled Cucumber (add-on)",vi:"Dưa leo chua (thêm)"},
-    a_add_pickled_okra:{en:"Pickled Okra (add-on)",vi:"Đậu bắp chua (thêm)"},
-    a_add_pickled_bitter:{en:"Pickled Bitter Gourd (add-on)",vi:"Khổ qua chua (thêm)"},
-    a_add_pickled_tofu:{en:"Pickled Tofu (add-on)",vi:"Đậu phụ chua (thêm)"},
-    a_add_wing:{en:"Fried Chicken Wing",vi:"Cánh gà chiên"},
-    a_add_fried_egg:{en:"Fried Egg",vi:"Trứng ốp la"},
-    /* 4) Guangxi */
-    gx_su:{en:"Plain Rice Roll (kosong)",vi:"Bánh cuốn trơn (kosong)"},
-    gx_veg:{en:"Veg Rice Roll",vi:"Bánh cuốn rau"},
-    gx_meatveg:{en:"Meat + Veg Rice Roll",vi:"Bánh cuốn thịt + rau"},
-    gx_meat:{en:"Meat Rice Roll",vi:"Bánh cuốn thịt"},
-    gx_full:{en:"Combo Rice Roll",vi:"Bánh cuốn thập cẩm"},
-    gx_spring:{en:"Spring Roll",vi:"Chả giò"},
-    gx_taro:{en:"Taro Cake",vi:"Bánh khoai môn"}
-  }
-};
-function t(k){return I18N.ui[LANG][k]||k;}
-function tItemName(id,fallback){return I18N.items[id]?.[LANG]||fallback;}
-
-/* ========= 菜单数据 ========= */
-const WONTON=[
-  {id:"w_small", name:"云吞面（小）", price:6.50},
-  {id:"w_mid",   name:"云吞面（中）", price:7.50},
-  {id:"w_big",   name:"云吞面（大）", price:8.50},
-  {id:"w_wantan_dry",  name:"云吞 干捞（一份）", price:5.00},
-  {id:"w_wantan_soup", name:"云吞 汤（一份）",   price:5.00},
-  {id:"w_add3",        name:"加料：云吞 ×3",     price:1.00},
-];
-const DRINKS=[
-  {id:"d_coffee_hot",   name:"咖啡（热）",   price:2.30},
-  {id:"d_coffee_ice",   name:"咖啡（冰）",   price:2.50},
-  {id:"d_coffeeC_hot",  name:"咖啡C（热）",  price:2.50},
-  {id:"d_coffeeC_ice",  name:"咖啡C（冰）",  price:2.70},
-  {id:"d_coffeeO_hot",  name:"咖啡O（热）",  price:2.00},
-  {id:"d_coffeeO_ice",  name:"咖啡O（冰）",  price:2.20},
-  {id:"d_milktea_hot",  name:"奶茶（热）",   price:2.30},
-  {id:"d_milktea_ice",  name:"奶茶（冰）",   price:2.50},
-  {id:"d_milkteaC_hot", name:"奶茶C（热）",  price:2.50},
-  {id:"d_milkteaC_ice", name:"奶茶C（冰）",  price:2.70},
-  {id:"d_milkteaSC_hot",name:"奶茶咸C（热）",price:2.50},
-  {id:"d_milkteaSC_ice",name:"奶茶咸C（冰）",price:2.70},
-  {id:"d_milo_hot",     name:"Milo（热）",   price:2.60},
-  {id:"d_milo_ice",     name:"Milo（冰）",   price:2.80},
-  {id:"d_miloC_hot",    name:"Milo C（热）", price:2.80},
-  {id:"d_miloC_ice",    name:"Milo C（冰）", price:3.00},
-  {id:"d_miloO_hot",    name:"Milo O（热）", price:2.60},
-  {id:"d_miloO_ice",    name:"Milo O（冰）", price:2.80},
-  {id:"d_canned",       name:"罐装水",       price:3.00},
-];
-const AUNTIE=[
-  {id:"a_bitter_rice_noodle", name:"苦瓜米粉",           price:6.00},
-  {id:"a_nasi_ayam",          name:"Nasi Lemak（有鸡肉）", price:6.00},
-  {id:"a_nasi_egg",           name:"Nasi Lemak（只有鸡蛋）", price:3.00},
-  {id:"a_pan_mee",            name:"面粉糕",             price:6.00},
-  {id:"a_braised_rice",       name:"红烧饭",             price:6.00},
-  {id:"a_congee_pork",        name:"鱼粥（猪肉）",        price:6.00},
-  {id:"a_congee_chicken",     name:"鱼粥（鸡肉）",        price:6.00},
-  {id:"a_mianxian",           name:"面线",               price:6.00},
-  {id:"a_lu_rou_fan",         name:"卤肉饭",             price:6.00},
-  {id:"a_kuey_teow_soup",     name:"果条汤",             price:6.00},
-  // 加料
-  {id:"a_add_century_egg",       name:"加皮蛋",     price:1.00},
-  {id:"a_add_pickled_cucumber",  name:"酸笋瓜",     price:1.50},
-  {id:"a_add_pickled_okra",      name:"酸羊角豆",   price:1.50},
-  {id:"a_add_pickled_bitter",    name:"酸苦瓜",     price:1.50},
-  {id:"a_add_pickled_tofu",      name:"酸豆腐",     price:1.50},
-  {id:"a_add_wing",              name:"炸鸡翅膀",   price:3.00},
-  {id:"a_add_fried_egg",         name:"煎鸡蛋",     price:1.00},
-];
-const GUANGXI=[
-  {id:"gx_su",      name:"素粉(kosong)",   price:1.00},
-  {id:"gx_veg",     name:"蔬菜卷筒粉",     price:2.00},
-  {id:"gx_meatveg", name:"菜加肉卷筒粉",   price:3.00},
-  {id:"gx_meat",    name:"肉卷筒粉",       price:3.00},
-  {id:"gx_full",    name:"全家福卷筒粉",   price:4.00},
-  {id:"gx_spring",  name:"春卷",           price:1.00},
-  {id:"gx_taro",    name:"芋头米糕",       price:1.00},
-];
-const ALL=[...WONTON,...DRINKS,...AUNTIE,...GUANGXI];
-
-/* ========= 渲染 ========= */
-const cart={}; // {id: qty}
-function itemCard(it){
-  const displayName=tItemName(it.id,it.name);
-  return `
-  <div class="item">
-    <div class="left">
-      <div class="title">${displayName}</div>
-      <div class="sub">RM ${it.price.toFixed(2)}</div>
-    </div>
-    <div>
-      <button class="btn small" onclick="dec('${it.id}')">-</button>
-      <div id="qty-${it.id}" class="qty">${cart[it.id]||0}</div>
-      <button class="btn small" onclick="inc('${it.id}')">+</button>
-      <div style="height:6px"></div>
-      <button class="btn add" onclick="inc('${it.id}')">${t('add')}</button>
-    </div>
-  </div>`;
-}
-function renderCategory(elId,list){
-  const el=document.getElementById(elId);
-  if(!el){ alert('缺少容器：'+elId); return; }
-  el.innerHTML=list.map(itemCard).join("");
-}
-function renderAll(){
-  // 文案
-  document.getElementById('title-main').textContent=t('title_main');
-  document.getElementById('title-sub').textContent=t('title_sub');
-  document.getElementById('panel-order').textContent=t('order');
-  document.getElementById('panel-cart').textContent=t('cart');
-  document.getElementById('label-table').textContent=t('table');
-  document.getElementById('takeaway-label').textContent=t('takeaway');
-  document.getElementById('note-label').textContent=t('note_label');
-  document.getElementById('btn-print').textContent=t('print');
-  document.getElementById('btn-done').textContent=t('done');
-  document.getElementById('kpi-orders-title').textContent=t('k_orders');
-  document.getElementById('kpi-items-title').textContent=t('k_items');
-  document.getElementById('kpi-sales-title').textContent=t('k_sales');
-  document.getElementById('btn-view').textContent=t('tool_today');
-  document.getElementById('btn-cat').textContent=t('tool_cat');
-  document.getElementById('btn-csv').textContent=t('tool_csv');
-  document.getElementById('btn-del').textContent=t('tool_del');
-  document.getElementById('note').placeholder=t('note_ph');
-
-  // 分类标题
-  document.getElementById('sum-wonton').textContent=t('cat_wonton');
-  document.getElementById('tip-wonton').textContent=t('cat_wonton_tip');
-  document.getElementById('sum-drinks').textContent=t('cat_drinks');
-  document.getElementById('tip-drinks').textContent=t('cat_drinks_tip');
-  document.getElementById('sum-auntie').textContent=t('cat_auntie');
-  document.getElementById('tip-auntie').textContent=t('cat_auntie_tip');
-  document.getElementById('sum-gx').textContent=t('cat_gx');
-  document.getElementById('tip-gx').textContent=t('cat_gx_tip');
-
-  // 菜单卡片
-  renderCategory("cat-wonton", WONTON);
-  renderCategory("cat-drinks", DRINKS);
-  renderCategory("cat-auntie", AUNTIE);
-  renderCategory("cat-guangxi", GUANGXI);
-
-  renderCart();
-  showKpis();
-}
-
-/* ========= 购物车 & 价格 ========= */
-function inc(id){ cart[id]=(cart[id]||0)+1; renderCart(); syncQty(id); }
-function dec(id){ if(!cart[id]) return; cart[id]--; if(cart[id]<=0) delete cart[id]; renderCart(); syncQty(id); }
-function syncQty(id){ const q=document.getElementById("qty-"+id); if(q) q.textContent=cart[id]||0; }
-function priceOf(id){ const it=ALL.find(x=>x.id===id); return it?it.price:0; }
-function nameOf(id){ const it=ALL.find(x=>x.id===id); if(!it) return id; return tItemName(id, it.name); }
-function renderCart(){
-  const el=document.getElementById("cart");
-  let subtotal=0, html="";
-  Object.keys(cart).forEach(id=>{
-    const qty=cart[id]; const line=priceOf(id)*qty; subtotal+=line;
-    html+=`<div>${nameOf(id)} × ${qty} = RM ${line.toFixed(2)}</div>`;
-  });
-  el.innerHTML = html + `<div class="sum">${t('sum_total')}: RM ${subtotal.toFixed(2)}</div>`;
-}
-
-/* ========= 本地统计 ========= */
-function todayKey(){
-  const d=new Date();
-  const yyyy=d.getFullYear(), mm=String(d.getMonth()+1).padStart(2,'0'), dd=String(d.getDate()).padStart(2,'0');
-  return "lyx_stats_"+`${yyyy}-${mm}-${dd}`;
-}
-function loadStats(){
-  const raw = localStorage.getItem(todayKey());
-  return raw ? JSON.parse(raw) : {orders:0, items:0, sales:0, list:[], cats:{}};
-}
-function saveStats(st){ localStorage.setItem(todayKey(), JSON.stringify(st)); showKpis(); }
-function showKpis(){
-  const s=loadStats();
-  document.getElementById('kpi-orders').textContent=s.orders;
-  document.getElementById('kpi-items').textContent=s.items;
-  document.getElementById('kpi-sales').textContent="RM "+(s.sales||0).toFixed(2);
-}
-
-/* ========= 完成并统计 → WhatsApp ========= */
-function finishAndSend(){
-  if(Object.keys(cart).length===0){ alert(t('alert_pick')); return; }
-
-  const table = document.getElementById('tableNo').value || "-";
-  const type  = document.getElementById('takeaway').checked ? t('takeaway') : t('dinein');
-  const note  = (document.getElementById('note').value||"").trim();
-
-  // 计算本单
-  let subtotal=0, itemsCount=0, lines=[], itemsArr=[];
-  Object.keys(cart).forEach(id=>{
-    const qty=cart[id]; itemsCount+=qty;
-    const lineAmt = priceOf(id)*qty; subtotal+=lineAmt;
-    lines.push(`- ${nameOf(id)} × ${qty} = RM ${lineAmt.toFixed(2)}`);
-    itemsArr.push({id, qty, amount:+lineAmt.toFixed(2)});
-  });
-
-  // 写统计（总体+分类）
-  const st=loadStats();
-  st.orders += 1; st.items += itemsCount; st.sales = +(st.sales + subtotal).toFixed(2);
-  const catMap={
-    [I18N.ui.zh.cat_name_w]:WONTON.map(x=>x.id),
-    [I18N.ui.zh.cat_name_d]:DRINKS.map(x=>x.id),
-    [I18N.ui.zh.cat_name_a]:AUNTIE.map(x=>x.id),
-    [I18N.ui.zh.cat_name_gx]:GUANGXI.map(x=>x.id),
-  };
-  st.cats = st.cats || {};
-  Object.entries(catMap).forEach(([cat,ids])=>{
-    let c=0,s=0; ids.forEach(id=>{ if(cart[id]){ c+=cart[id]; s+=cart[id]*priceOf(id);} });
-    if(!st.cats[cat]) st.cats[cat]={count:0,amount:0};
-    st.cats[cat].count += c; st.cats[cat].amount = +(st.cats[cat].amount + s).toFixed(2);
-  });
-  st.list.push({time:new Date().toLocaleString(), table, type, lines, items_struct:itemsArr, total:subtotal, note});
-  saveStats(st);
-
-  // 组合消息
-  const NL = "\n";
-  const msg = [
-    `${t('title_main')} 订单`,
-    `${t('table')}: ${table}`,
-    `${t('type')}: ${type}`, "",
-    LANG==='en'?"Items:":"明细:"
-  ].concat(lines).concat(["",`${t('sum_total')}: RM ${subtotal.toFixed(2)}`, note?(t('note_label')+": "+note):""]).join(NL);
-
-  // 打开 WhatsApp（外链 & 兜底 Scheme）
-  const url = "https://wa.me/?text=" + encodeURIComponent(msg);
-  let opened=false;
-  try{ window.open(url,'_blank'); opened=true; }catch(e){}
-  if(!opened){ location.href=url; }
-  setTimeout(()=>{ try{ location.href = "whatsapp://send?text=" + encodeURIComponent(msg); }catch(e){} },600);
-
-  // 清空购物车
-  for(const k in cart) delete cart[k];
-  renderCart(); showKpis();
-}
-
-/* ========= 打印小票 ========= */
-function printReceipt(){
-  if(Object.keys(cart).length===0){ alert(t('alert_empty')); return; }
-  const area=document.getElementById('print-area'); area.classList.remove('hidden');
-  const table=document.getElementById('tableNo').value||'-';
-  const type=document.getElementById('takeaway').checked?t('takeaway'):t('dinein');
-  let subtotal=0, body='';
-  Object.keys(cart).forEach(id=>{
-    const qty=cart[id], line=priceOf(id)*qty; subtotal+=line;
-    body+=`<div>${nameOf(id)} × ${qty}<span style="float:right">RM ${line.toFixed(2)}</span></div>`;
-  });
-  area.innerHTML=`
-  <div style="max-width:340px;margin:0 auto;font-size:13px;line-height:1.35">
-    <div style="text-align:center;font-weight:900">${t('title_main')}<br><small>${t('title_sub')}</small></div>
-    <div>${t('time')}: ${new Date().toLocaleString()}</div>
-    <div>${t('table')}: ${table}</div>
-    <div>${t('type')}: ${type}</div>
-    <hr>${body}<hr>
-    <div style="font-weight:900">${t('sum_total')}: RM ${subtotal.toFixed(2)}</div>
-  </div>`;
-  window.print(); area.classList.add('hidden');
-}
-
-/* ========= 查看 / 导出 / 删除 ========= */
-function viewToday(){
-  const st=loadStats();
-  const toLines = (r)=>{
-    if (Array.isArray(r.items_struct) && r.items_struct.length){
-      return r.items_struct.map(it=>`- ${nameOf(it.id)} × ${it.qty} = RM ${(+it.amount).toFixed(2)}`);
-    }
-    return (r.lines||[]);
-  };
-  const lines=(st.list||[]).map((r,i)=>{
-    const rebuilt = toLines(r);
-    return `${i+1}. [${r.time}] ${r.table}/${r.type}\n   ${rebuilt.join("\n   ")}\n   ${I18N.ui.en.sum_total}: RM ${(+r.total).toFixed(2)}${r.note?("\n   "+t('note_label')+": "+r.note):""}`;
-  }).join("\n\n");
-  alert((lines||t('today_none')) + `\n\n${t('k_orders')}: ${st.orders} | ${t('k_items')}: ${st.items} | ${t('k_sales')}: RM ${st.sales.toFixed(2)}`);
-}
-function viewByCategory(){
-  const st=loadStats(); const c=st.cats||{};
-  const w = I18N.ui.zh.cat_name_w, d = I18N.ui.zh.cat_name_d, a = I18N.ui.zh.cat_name_a, gx = I18N.ui.zh.cat_name_gx;
-  const mapName = {[w]: I18N.ui[LANG].cat_name_w,[d]: I18N.ui[LANG].cat_name_d,[a]: I18N.ui[LANG].cat_name_a,[gx]: I18N.ui[LANG].cat_name_gx};
-  const msg = [
-    I18N.ui[LANG].cat_report_title,
-    `${mapName[w]}：${(c[w]?.count||0)}  / RM ${(c[w]?.amount||0).toFixed(2)}`,
-    `${mapName[d]}：${(c[d]?.count||0)}  / RM ${(c[d]?.amount||0).toFixed(2)}`,
-    `${mapName[a]}：${(c[a]?.count||0)}  / RM ${(c[a]?.amount||0).toFixed(2)}`,
-    `${mapName[gx]}：${(c[gx]?.count||0)} / RM ${(c[gx]?.amount||0).toFixed(2)}`
-  ].join("\n");
-  alert(msg);
-}
-function exportCSV(){
-  const k=todayKey(), st=JSON.parse(localStorage.getItem(k)||"{}");
-  const headers=[t('csv_time'),t('csv_table'),t('csv_type'),t('csv_items'),t('csv_total'),t('csv_note')];
-  const rows=[headers.join(",")];
-  (st.list||[]).forEach(r=>{
-    let itemsStr="";
-    if(Array.isArray(r.items_struct)&&r.items_struct.length){
-      itemsStr=r.items_struct.map(it=>`${nameOf(it.id)} × ${it.qty} = RM ${(+it.amount).toFixed(2)}`).join(" | ");
-    }else{
-      itemsStr=(r.lines||[]).join(" | ");
-    }
-    rows.push([r.time,r.table,r.type,itemsStr.replace(/,/g," "),"RM "+(+r.total).toFixed(2),(r.note||"").replace(/,/g," ")].join(","));
-  });
-  const blob=new Blob([rows.join("\n")],{type:"text/csv;charset=utf-8"});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`lyx_today_${todayKey().slice(-10)}.csv`; a.click();
-}
-const DELETE_PWD="Lyx115599$";
-function deleteWithPwd(){
-  const p=prompt("输入密码以清空今天统计");
-  if(p!==DELETE_PWD){ alert("密码错误"); return; }
-  localStorage.removeItem(todayKey());
-  showKpis(); alert("已清空今天统计");
-}
-
-/* ========= 语言按钮 / 事件绑定（稳固） ========= */
-function setLang(next){
-  LANG = next;
-  document.getElementById('btn-zh').classList.toggle('active', next==='zh');
-  document.getElementById('btn-en').classList.toggle('active', next==='en');
-  document.getElementById('btn-vi').classList.toggle('active', next==='vi');
-  renderAll();
-}
-function bindButtonsSafely(){
-  const bind=(id,fn)=>{
-    const el=document.getElementById(id); if(!el) return;
-    const fresh=el.cloneNode(true); el.parentNode.replaceChild(fresh,el);
-    fresh.id=id; fresh.addEventListener('click',fn);
-  };
-  bind('btn-print', printReceipt);
-  bind('btn-done',  finishAndSend);
-  bind('btn-view',  viewToday);
-  bind('btn-cat',   viewByCategory);
-  bind('btn-csv',   exportCSV);
-  bind('btn-del',   deleteWithPwd);
-  document.getElementById('btn-zh').onclick=()=>setLang('zh');
-  document.getElementById('btn-en').onclick=()=>setLang('en');
-  document.getElementById('btn-vi').onclick=()=>setLang('vi');
-}
-document.addEventListener("DOMContentLoaded", ()=>{ renderAll(); bindButtonsSafely(); });
-</script>
 </body>
 </html>
