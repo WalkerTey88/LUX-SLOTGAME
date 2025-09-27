@@ -1,0 +1,26 @@
+{
+    "name": "龍兴记云吞面点单系统",
+    "short_name": "LYX 点单",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#740c10",
+    "theme_color": "#ffd86b",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "description": "龍兴记云吞面点单系统，支持多语言、离线使用和订单统计",
+    "orientation": "portrait",
+    "scope": "/",
+    "lang": "zh-CN"
+}
