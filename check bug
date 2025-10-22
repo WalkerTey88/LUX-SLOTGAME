@@ -315,6 +315,7 @@ html_template = """
 
         let isSpinning = false, isAutoSpin = false, wantsToStop = false, spinStopTimer = null;
         let spinIntervals = [], allCells = [], reelAngles = [];
+        let clientAutoSpins = 0; // 前端本地维护自动旋转次数
 
         const allSymbols = ['🀄️', '發', 'A', '💰', '8️⃣8️⃣', '🐲', '😎'];
 
@@ -356,24 +357,42 @@ html_template = """
         function onAutoSpinClick() {
             isAutoSpin = !isAutoSpin; doVibrate(30);
             if (isAutoSpin) {
-                server_state.auto_spins = parseInt(autoSpinsSelect.value);
+                clientAutoSpins = parseInt(autoSpinsSelect.value) || 0;
                 autoSpinButton.textContent = "取消"; autoSpinButton.classList.add('active');
                 stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = true;
-                if (!isSpinning && server_state.auto_spins > 0) startSpin();
+                if (!isSpinning && clientAutoSpins > 0) startSpin();
+                else if (clientAutoSpins === 0) {
+                    // 用户选择了 0 次，但开启了自动，立刻取消
+                    isAutoSpin = false; autoSpinButton.textContent = "自动"; autoSpinButton.classList.remove('active');
+                    stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = false;
+                }
             } else {
                 autoSpinButton.textContent = "自动"; autoSpinButton.classList.remove('active');
                 stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = false;
+                clientAutoSpins = 0;
             }
         }
 
         function onSpinButtonClick() {
             doVibrate(50);
-            if (isSpinning) { wantsToStop = true; spinButton.textContent = "停止中.."; spinButton.disabled = true; if (spinStopTimer) clearTimeout(spinStopTimer); }
-            else { isAutoSpin = false; autoSpinButton.textContent = "自动"; autoSpinButton.classList.remove('active'); stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = false; startSpin(); }
+            if (isSpinning) {
+                wantsToStop = true;
+                spinButton.textContent = "停止中..";
+                spinButton.disabled = true;
+                if (spinStopTimer) clearTimeout(spinStopTimer);
+            } else {
+                isAutoSpin = false;
+                clientAutoSpins = 0;
+                autoSpinButton.textContent = "自动";
+                autoSpinButton.classList.remove('active');
+                stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = false;
+                startSpin();
+            }
         }
 
         async function startSpin() {
-            if (isSpinning) return; isSpinning = true; wantsToStop = false; clearWinEffects();
+            if (isSpinning) return;
+            isSpinning = true; wantsToStop = false; clearWinEffects();
 
             const currentStake = parseFloat(stakeSelect.value), multiplier = parseInt(multiplierSelect.value), currency = currencySelect.value;
             spinButton.textContent = "秒停"; spinButton.classList.add('spinning'); spinButton.disabled = false;
@@ -389,13 +408,21 @@ html_template = """
                 data = await response.json();
             } catch (error) {
                 console.error('Spin Error:', error); messageBar.textContent = `错误: ${error.message}`;
-                stopSpinningState(data?.balance); if (error.message === '余额不足') isAutoSpin = false; return;
+                stopSpinningState(data?.balance);
+                if (error.message === '余额不足') {
+                    isAutoSpin = false; clientAutoSpins = 0;
+                }
+                return;
             }
             
             const timeElapsed = Date.now() - startTime, minSpinTime = 3000;
             const showResultsFunc = () => showResults(data);
             if (wantsToStop) showResultsFunc();
-            else { const remainingTime = minSpinTime - timeElapsed; if (remainingTime > 0) spinStopTimer = setTimeout(showResultsFunc, remainingTime); else showResultsFunc(); }
+            else {
+                const remainingTime = minSpinTime - timeElapsed;
+                if (remainingTime > 0) spinStopTimer = setTimeout(showResultsFunc, remainingTime);
+                else showResultsFunc();
+            }
         }
 
         function showResults(data) {
@@ -430,8 +457,18 @@ html_template = """
             });
 
             stopSpinningState(data.balance);
-            if (isAutoSpin && data.balance > 0 && data.auto_spins_left > 0) setTimeout(startSpin, 1500);
-            else { isAutoSpin = false; autoSpinButton.textContent = "自动"; autoSpinButton.classList.remove('active'); stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = false; }
+
+            // 使用前端 clientAutoSpins 控制自动旋转循环
+            if (isAutoSpin && data.balance > 0 && clientAutoSpins > 0) {
+                clientAutoSpins--;
+                setTimeout(startSpin, 1500);
+            } else {
+                isAutoSpin = false;
+                autoSpinButton.textContent = "自动";
+                autoSpinButton.classList.remove('active');
+                stakeSelect.disabled = multiplierSelect.disabled = autoSpinsSelect.disabled = false;
+                clientAutoSpins = 0;
+            }
         }
 
         function startReelAnimation() {
@@ -459,10 +496,22 @@ html_template = """
             }
         }
 
+        // 后端 flat 索引 (row-major, index = row*5 + col) -> 前端 allCells 索引 (col*3 + row)
+        function flatIndexToCellIndex(flatIndex) {
+            const row = Math.floor(flatIndex / 5);
+            const col = flatIndex % 5;
+            return col * 3 + row;
+        }
+
         function showWinEffects(winningLines) {
             if (!winningLines) return;
             let allIndices = new Set();
-            winningLines.forEach(line => line.indices.forEach(index => allIndices.add(index)));
+            winningLines.forEach(line => {
+                line.indices.forEach(index => {
+                    const mapped = flatIndexToCellIndex(index);
+                    allIndices.add(mapped);
+                });
+            });
             allIndices.forEach(index => allCells[index]?.classList.add('win-highlight'));
         }
 
