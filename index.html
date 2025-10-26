@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Game (v5.5.7 - Jackpot UI & 赔付表修复)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="win-loss-table" class="table-box">
+            <h3>输赢记录</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>局数</th>
+                        <th>结果</th>
+                        <th>金额</th>
+                    </tr>
+                </thead>
+                <tbody id="win-loss-body">
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="jackpot-display" class="table-box">
+            <span id="jackpot-amount">0</span>
+        </div>
+
+        <div id="announcement-board" class="table-box">
+            <h3>公告</h3>
+            <div id="announcement-content">
+                </div>
+        </div>
+
+        <div id="reels-container">
+            <div class="reel"></div>
+            <div class="reel"></div>
+            <div class="reel"></div>
+            <div class="reel"></div>
+            <div class="reel"></div>
+            <canvas id="win-lines-canvas"></canvas>
+        </div>
+
+        <div id="ui-panel">
+            <div class="bottom-ui-inner">
+                <div class="display-panel">
+                    <div class="display-box small-text-box">
+                        <span>已修改</span>
+                        <span id="modified-display" class="label-small">0.00</span>
+                    </div>
+                    <div class="display-box small-text-box">
+                        <span>押注</span>
+                        <div class="bet-controls">
+                            <button id="btn-bet-down" class="bet-btn">-</button>
+                            <span id="bet-display">1.00</span>
+                            <button id="btn-bet-up" class="bet-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="display-box small-text-box">
+                        <span>中奖</span>
+                        <span id="win-display">0.00</span>
+                    </div>
+                    <div class="display-box small-text-box">
+                        <span>余额</span>
+                        <span id="balance-display">1000.00</span>
+                    </div>
+                </div>
+                <div class="control-panel">
+                    <button id="btn-max-bet" class="control-btn">最大押注</button>
+                    <button id="btn-autoplay" class="control-btn">自动</button>
+                    <button id="btn-info" class="control-btn">赔付表</button>
+                    <button id="btn-settings" class="control-btn">设置</button>
+                    <button id="btn-spin">旋转</button>
+                    <button id="btn-fullscreen" class="control-btn hidden">满屏</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="free-spins-overlay" class="hidden">
+            <div id="free-spins-modal">
+                <h2 id="free-spins-title">恭喜！</h2>
+                <p id="free-spins-message">您获得了 10 次免费旋转！</p>
+                <p>所有奖金 x3</p>
+                <button id="free-spins-start-button">开始</button>
+                <div id="free-spins-counter" class="hidden">
+                    <span>剩余旋转: <span id="free-spins-remaining">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="autoplay-overlay" class="hidden">
+            <div id="autoplay-modal">
+                <h2>选择自动旋转次数</h2>
+                <div class="autoplay-options">
+                    <button class="autoplay-option-btn" data-count="10">10 次</button>
+                    <button class="autoplay-option-btn" data-count="50">50 次</button>
+                    <button class="autoplay-option-btn" data-count="100">100 次</button>
+                </div>
+                <button id="autoplay-cancel-btn">取消</button>
+            </div>
+        </div>
+
+        <div id="paytable-overlay" class="hidden">
+            <div id="paytable-modal">
+                <h2>赔付表</h2>
+                <div id="paytable-content">
+                    </div>
+                <button id="paytable-close-btn">关闭</button>
+            </div>
+        </div>
+
+        <div id="portrait-warning" class="hidden">
+            <div id="warning-modal">
+                <h2>请旋转您的设备</h2>
+                <p>为获得最佳游戏体验，建议使用横屏模式进行游戏。</p>
+            </div>
+        </div>
+
+        <div id="jackpot-win-overlay" class="hidden">
+            <div id="jackpot-win-modal">
+                <img id="jackpot-win-image" src="images/2223.jpg" alt="Jackpot Win">
+                <button id="jackpot-win-close">关闭</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
