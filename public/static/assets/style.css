@@ -8,13 +8,14 @@ body, html {
     overflow: hidden; /* 隱藏滾動條 */
 }
 
-/* 默认显示游戏 (这是横屏状态) */
+/* 遊戲容器，默認隱藏或準備好顯示 */
 #game-container {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none; /* 默認先隱藏 */
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 canvas {
@@ -23,11 +24,55 @@ canvas {
     object-fit: contain;
 }
 
-/* --- 强制横屏 --- */
+/* --- 旋轉提示器樣式 --- */
+#orientation-blocker {
+    display: none; /* 默認先隱藏 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+    padding-top: 50%;
+    box-sizing: border-box;
+    z-index: 20;
+}
+#orientation-blocker p {
+    margin: 10px;
+}
 
-/* ↓↓↓
-    以下所有关于 #orientation-blocker 和 @media (orientation: portrait) 的规则
-    都已经被我删除了。
-    这样游戏容器 #game-container 就永远不会被 display: none;
-    ↓↓↓
-*/
+
+/* --- 强制横屏逻辑 (只在横屏时显示游戏) --- */
+
+/* ------------------------------------------------ */
+/* 狀態 A: 設備處於【橫屏】(landscape) */
+/* ------------------------------------------------ */
+@media (orientation: landscape) {
+    /* 橫屏時，顯示遊戲容器 */
+    #game-container {
+        display: flex; 
+    }
+    
+    /* 橫屏時，隱藏旋轉提示器 */
+    #orientation-blocker {
+        display: none;
+    }
+}
+
+/* ------------------------------------------------ */
+/* 狀態 B: 設備處於【豎屏】(portrait) */
+/* ------------------------------------------------ */
+@media (orientation: portrait) {
+    /* 豎屏時，隱藏遊戲容器 (阻止遊戲運行和顯示) */
+    #game-container {
+        display: none !important; /* 使用 !important 確保覆蓋默認設置 */
+    }
+    
+    /* 豎屏時，顯示旋轉提示器 */
+    #orientation-blocker {
+        display: block;
+    }
+}
