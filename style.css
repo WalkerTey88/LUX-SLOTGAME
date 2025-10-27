@@ -1,0 +1,33 @@
+/* --- 基礎佈局 --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    overflow: hidden; /* 隱藏滾動條 */
+}
+
+/* 默认显示游戏 (这是横屏状态) */
+#game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* --- 强制横屏 --- */
+
+/* ↓↓↓
+    以下所有关于 #orientation-blocker 和 @media (orientation: portrait) 的规则
+    都已经被我删除了。
+    这样游戏容器 #game-container 就永远不会被 display: none;
+    ↓↓↓
+*/
